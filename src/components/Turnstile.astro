@@ -1,0 +1,53 @@
+---
+const { siteKey } = Astro.props;
+---
+<div class="cf-turnstile" data-sitekey={siteKey} data-theme="light" data-callback="onTurnstileSuccess" data-error-callback="onTurnstileError"></div>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script define:vars={{ siteKey }}>
+  // Global callbacks voor Turnstile
+  window.onTurnstileSuccess = function(token) {
+    console.log('[TURNSTILE] Token gegenereerd:', token ? token.substring(0, 20) + '...' : 'geen token');
+  };
+  
+  window.onTurnstileError = function(error) {
+    console.error('[TURNSTILE] Error callback:', error);
+  };
+  
+  // Wacht tot Turnstile is geladen en log errors
+  window.addEventListener('load', () => {
+    console.log('[TURNSTILE] Page loaded, checking Turnstile...');
+    console.log('[TURNSTILE] Site key:', siteKey ? siteKey.substring(0, 20) + '...' : 'GEEN SITE KEY!');
+    
+    if (typeof turnstile !== 'undefined') {
+      console.log('[TURNSTILE] Turnstile global object gevonden');
+      
+      // Check of widget element bestaat
+      const widget = document.querySelector('.cf-turnstile');
+      if (widget) {
+        console.log('[TURNSTILE] Widget element gevonden in DOM');
+        console.log('[TURNSTILE] Widget data-sitekey:', widget.getAttribute('data-sitekey') ? widget.getAttribute('data-sitekey').substring(0, 20) + '...' : 'geen sitekey attribute');
+      } else {
+        console.error('[TURNSTILE] Widget element NIET gevonden in DOM!');
+      }
+    } else {
+      console.error('[TURNSTILE] Turnstile script niet geladen - turnstile global object niet gevonden');
+    }
+  });
+  
+  // Listen voor Turnstile errors
+  window.addEventListener('error', (e) => {
+    if (e.message && (e.message.includes('turnstile') || e.message.includes('Turnstile'))) {
+      console.error('[TURNSTILE] Global error:', e.message, e);
+    }
+  });
+  
+  // Check na 2 seconden of er een token is
+  setTimeout(() => {
+    const input = document.querySelector('input[name="cf-turnstile-response"]');
+    if (input && input.value) {
+      console.log('[TURNSTILE] Token input gevonden na 2s: Heeft waarde');
+    } else {
+      console.error('[TURNSTILE] Token input NIET gevonden na 2s - widget heeft geen token gegenereerd');
+    }
+  }, 2000);
+</script>

@@ -1,0 +1,74 @@
+{
+  "hero": {
+    "eyebrow": "Mogelijk gemaakt door Sportvereniging H.G.V.",
+    "title": "Het grootste apenkooitoernooi voor basisscholen",
+    "subtitle": "Ren, klim, ontwijk en beleef het ultieme schoolsporttoernooi",
+    "lead": "Schrijf jouw klas of schoolteam in voor de volgende editie. Veilig georganiseerd, duidelijke spelregels en gegarandeerd plezier voor basisschoolleerlingen vanaf groep 4.",
+    "heroImage": {
+      "src": "/images/homepage/hero-actiebeeld-1200w.avif",
+      "alt": "Actiebeeld van apenkooien met basisschoolkinderen in een sportzaal"
+    },
+    "ctas": [
+      {"label": "Inschrijven", "href": "/#inschrijven"},
+      {"label": "Spelregels & FAQ", "href": "/spelregels"},
+      {"label": "Contact", "href": "/contact"}
+    ]
+  },
+  "whatIs": {
+    "title": "Wat is het Apenkooitoernooi?",
+    "body": "Het Apenkooitoernooi is een schoolsport-toernooi speciaal voor basisscholen, georganiseerd door Sportvereniging H.G.V. Teams nemen het tegen elkaar op in een grote apenkooi-opstelling: blijf van de vloer af, ontwijk de tikker en scoor door slim samen te werken. Het draait om plezier, sportiviteit en een onvergetelijke dag voor leerlingen."
+  },
+  "forWho": {
+    "title": "Voor wie organiseren we dit?",
+    "subtitle": "We organiseren het toernooi voor basisschoolleerlingen vanaf groep 4, verdeeld in twee aparte categorieën:",
+    "tournaments": [
+      {
+        "title": "Categorie 1 - Groep 4,5, 6",
+        "description": "Vooral speels",
+        "features": []
+      },
+      {
+        "title": "Categorie 2 - Groep 6,7, 8",
+        "description": "Meer tactiek en snelheid",
+        "features": []
+      }
+    ]
+  },
+  "howToRegister": {
+    "title": "Hoe werkt inschrijven?",
+    "steps": [
+      "Klik op Inschrijven en vul de teamgegevens in",
+      "Ontvang bevestiging en praktische informatie",
+      "Lees vooraf de spelregels (vervanging op de dag zelf is toegestaan)",
+      "Kom met je team naar het toernooi — en spelen maar!"
+    ],
+    "cta": {"label": "Inschrijven", "href": "/#inschrijven"}
+  },
+  "safety": {
+    "title": "Veilig & eerlijk spelen",
+    "body": "Veiligheid en sportiviteit staan voorop. We werken met duidelijke regels, goed toezicht en materialen die passen bij basisschoolleerlingen. Zo kan iedereen met plezier en vertrouwen meedoen.",
+    "cta": {"label": "Spelregels & FAQ", "href": "/spelregels"}
+  },
+  "faq": {
+    "title": "Veelgestelde vragen",
+    "questions": [
+      {
+        "question": "Mag iemand vervangen worden als een leerling ziek is?",
+        "answer": "Ja"
+      },
+      {
+        "question": "Moet de school toestellen meenemen?",
+        "answer": "Nee, alles staat klaar"
+      },
+      {
+        "question": "Hoe worden teams ingedeeld?",
+        "answer": "Op basis van categorie (Groep 4/5/6 middenbouw of Groep 6/7/8 bovenbouw)"
+      }
+    ],
+    "cta": {"label": "Bekijk alle FAQ's", "href": "/faq"}
+  },
+  "contact": {
+    "title": "Contact & updates",
+    "body": "Volg ons voor nieuwe speeldagen, foto's, uitslagen en inschrijfopeningen. Vragen? Neem gerust contact op via het contactformulier."
+  }
+}

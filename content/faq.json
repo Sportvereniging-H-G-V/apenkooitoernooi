@@ -1,0 +1,121 @@
+{
+  "title": "Veelgestelde vragen\nApenkooitoernooi",
+  "subtitle": "Alles wat je moet weten over het apenkooitoernooi",
+  "intro": "Hieronder vind je de meest gestelde vragen over het apenkooitoernooi. Staat jouw vraag er niet bij? Neem dan gerust contact met ons op.",
+  "sections": [
+    {
+      "title": "Algemene vragen",
+      "faqs": [
+        {
+          "q": "Wat is een apenkooitoernooi?",
+          "a": "Een apenkooitoernooi is een schoolsporttoernooi waarbij teams het tegen elkaar opnemen in een grote apenkooi-opstelling. Teams proberen zo lang mogelijk van de grond te blijven door over toestellen te springen, klimmen en balanceren."
+        },
+        {
+          "q": "Voor welke leeftijden is het toernooi?",
+          "a": "Het toernooi is bedoeld voor basisschoolleerlingen vanaf groep 4, verdeeld in twee categorieën: Groep 4/5/6 (middenbouw) en Groep 6/7/8 (bovenbouw)."
+        },
+        {
+          "q": "Hoeveel personen telt een team?",
+          "a": "Elk team bestaat uit 6-10 deelnemers. Vervangingen zijn toegestaan tot 15 minuten voor de start van het toernooi."
+        },
+        {
+          "q": "Hoe lang duurt het toernooi?",
+          "a": "Het hele toernooi duurt ongeveer 4 uur. Per categorie duurt de poule ongeveer 2 uur. Dit is inclusief warming-up, uitleg van de regels en prijsuitreiking. Elke ronde duurt 4 minuten."
+        }
+      ]
+    },
+    {
+      "title": "Inschrijving en deelname",
+      "faqs": [
+        {
+          "q": "Moet ik me van tevoren aanmelden?",
+          "a": "Ja, aanmelding is verplicht. Je kunt je aanmelden via het formulier op deze website. De deadline is 1,5 week voor het toernooi."
+        },
+        {
+          "q": "Kan ik me nog inschrijven na de deadline?",
+          "a": "Late inschrijvingen worden alleen geaccepteerd bij vrije plaatsen. Neem in dat geval contact met ons op."
+        },
+        {
+          "q": "Mag iemand vervangen worden als een leerling ziek is?",
+          "a": "Ja, vervangingen zijn toegestaan tot 15 minuten voor de start van het toernooi. Meld dit wel bij de wedstrijdleiding."
+        },
+        {
+          "q": "Kunnen individuele kinderen meedoen?",
+          "a": "Het toernooi is bedoeld voor teams. Individuele kinderen kunnen zich aanmelden en bij genoeg losse aanmeldingen worden ingedeeld in een team."
+        }
+      ]
+    },
+    {
+      "title": "Praktische zaken",
+      "faqs": [
+        {
+          "q": "Wat moet ik meenemen?",
+          "a": "Neem sportkleding en sportschoenen met goede grip mee. Geen sieraden, horloges of andere voorwerpen die kunnen blijven haken. Water wordt door de organisatie verzorgd."
+        },
+        {
+          "q": "Moet de school toestellen meenemen?",
+          "a": "Nee, alle benodigde materialen worden door de organisatie verzorgd. Teams hoeven niets mee te nemen behalve sportkleding en -schoenen."
+        },
+        {
+          "q": "Is er begeleiding aanwezig?",
+          "a": "Ja, er zijn altijd ervaren begeleiders aanwezig die de veiligheid waarborgen en het toernooi begeleiden. Elke apenkooi heeft minimaal 2 begeleiders."
+        },
+        {
+          "q": "Wat als het slecht weer is?",
+          "a": "Het toernooi vindt plaats in een overdekte sporthal, dus slecht weer is geen probleem. Bij extreme weersomstandigheden wordt het toernooi verplaatst."
+        }
+      ]
+    },
+    {
+      "title": "Veiligheid en regels",
+      "faqs": [
+        {
+          "q": "Is het toernooi veilig?",
+          "a": "Ja, veiligheid staat voorop. Alle toestellen worden vooraf gecontroleerd, er is altijd een EHBO'er aanwezig en er zijn voldoende begeleiders voor toezicht."
+        },
+        {
+          "q": "Wat zijn de belangrijkste regels?",
+          "a": "Spelers mogen elkaar niet duwen, trekken of hinderen. Alleen eigen vaardigheden en teamwork tellen. Respect naar elkaar en de begeleiders is verplicht."
+        },
+        {
+          "q": "Wat gebeurt er bij een blessure?",
+          "a": "Bij verwondingen wordt het spel onmiddellijk gestopt. Er is altijd een EHBO'er aanwezig die eerste hulp kan verlenen."
+        },
+        {
+          "q": "Kunnen kinderen met een beperking meedoen?",
+          "a": "Ja, we streven naar inclusiviteit. Neem contact met ons op om te bespreken welke aanpassingen mogelijk zijn."
+        }
+      ]
+    },
+    {
+      "title": "Prijzen en resultaten",
+      "faqs": [
+        {
+          "q": "Zijn er prijzen te winnen?",
+          "a": "Ja, de winnaar van elke categorie ontvangt een prijs."
+        },
+        {
+          "q": "Hoe worden de winnaars bepaald?",
+          "a": "Het tikkende team kan punten verdienen door de renners te tikken. Ze kunnen ook minpunten krijgen als ze op de grond komen bijvoorbeeld. Aan het einde van alle rondes wordt het totaal aantal punten per team berekend. Het team met de meeste punten wint."
+        }
+      ]
+    },
+    {
+      "title": "Contact en informatie",
+      "faqs": [
+        {
+          "q": "Waar kan ik meer informatie krijgen?",
+          "a": "Je kunt contact met ons opnemen via het contactformulier op deze website of via de contactgegevens in de footer."
+        },
+        {
+          "q": "Kan ik foto's maken tijdens het toernooi?",
+          "a": "Ja, foto's maken is toegestaan. We vragen wel om respectvol om te gaan met de privacy van alle deelnemers."
+        },
+        {
+          "q": "Wordt het toernooi gefilmd?",
+          "a": "Er worden foto's en video's gemaakt voor promotiedoeleinden. Door deelname geef je toestemming voor het gebruik van deze beelden."
+        }
+      ]
+    }
+  ]
+}

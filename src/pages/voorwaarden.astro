@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const site = await import('../../content/site.json');
+const voorwaarden = await import('../../content/voorwaarden.json');
+---
+<Base title="Algemene Voorwaarden - Apenkooitoernooi">
+  <Header title={site.default.brand} />
+  
+  <!-- Custom Hero sectie -->
+  <section class="relative py-20 overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute inset-0">
+      <div class="absolute top-10 left-10 w-32 h-32 bg-primary-200/30 rounded-full blur-2xl"></div>
+      <div class="absolute top-32 right-20 w-24 h-24 bg-blue-200/30 rounded-full blur-xl"></div>
+      <div class="absolute bottom-20 left-1/4 w-40 h-40 bg-orange-200/20 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
+      <h1 class="text-5xl md:text-7xl font-bold text-slate-900 mb-8 leading-tight">
+        {voorwaarden.default.title}
+      </h1>
+      <p class="text-2xl text-slate-600 leading-relaxed max-w-4xl mx-auto mb-4">
+        {voorwaarden.default.subtitle}
+      </p>
+      <p class="text-lg text-slate-500 leading-relaxed max-w-3xl mx-auto">
+        Apenkooitoernooi wordt georganiseerd door {site.default.org}.
+      </p>
+    </div>
+  </section>
+  
+  <!-- Intro sectie -->
+  <section class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="bg-blue-50 border-l-4 border-blue-400 p-8 rounded-r-2xl mb-8 shadow-lg">
+        <p class="text-xl text-slate-700 leading-relaxed">{voorwaarden.default.intro}</p>
+      </div>
+      <p class="text-sm text-slate-500 text-right">{voorwaarden.default.lastUpdated}</p>
+    </div>
+  </section>
+  
+  <!-- Voorwaarden secties -->
+  <div>
+    {voorwaarden.default.sections.map((section, sectionIndex) => (
+      <section class="py-20 -mt-4">
+        <div class="max-w-6xl mx-auto px-6">
+          <div class="mb-16">
+            <h2 class="text-4xl font-bold text-slate-900 mb-6 flex items-center justify-center">
+              <span class="bg-primary-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mr-4">
+                {sectionIndex + 1}
+              </span>
+              {section.title}
+            </h2>
+            <div class="w-24 h-1 bg-primary-600 mx-auto"></div>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-8">
+            {section.items.map((item) => (
+              <div class="bg-white rounded-2xl p-8 shadow-xl border border-slate-200 hover:shadow-2xl transition-shadow duration-300">
+                <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-start">
+                  <span class="text-primary-600 mr-3 mt-1 text-2xl">📋</span>
+                  {item.titel}
+                </h3>
+                <p class="text-slate-600 leading-relaxed text-lg ml-11">{item.beschrijving}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))}
+  </div>
+  
+  <!-- Contact sectie -->
+  <section class="py-20 -mt-4">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold text-slate-900 mb-6">Vragen over de voorwaarden?</h2>
+      <p class="text-xl text-slate-600 mb-8">
+        Heb je vragen over deze algemene voorwaarden? Neem gerust contact met ons op.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="inline-flex items-center px-8 py-4 bg-primary-600 text-white rounded-xl font-semibold text-lg hover:bg-primary-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 shadow-md">
+          📧 Contact opnemen
+        </a>
+        <a href="/faq" class="inline-flex items-center px-8 py-4 bg-slate-600 text-white rounded-xl font-semibold text-lg hover:bg-slate-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 shadow-md">
+          ❓ FAQ bekijken
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <Footer org={site.default.org} contact={site.default.contact} />
+</Base>

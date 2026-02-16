@@ -1,0 +1,104 @@
+{
+  "title": "Spelregels Apenkooitoernooi",
+  "subtitle": "Alle regels en afspraken voor een eerlijk en veilig toernooi",
+  "intro": "Het apenkooitoernooi is een schoolsporttoernooi waarbij teams het tegen elkaar opnemen in een grote apenkooi-opstelling. Hieronder vind je alle regels en afspraken voor een eerlijk en veilig toernooi.",
+  "sections": [
+    {
+      "title": "Algemene regels",
+      "items": [
+        {
+          "titel": "Doel van het spel",
+          "beschrijving": "Eén team is de tikker en probeert zoveel mogelijk apen te tikken, terwijl het andere team over de toestellen beweegt zonder de grond te raken en zo min mogelijk getikt te worden."
+        },
+        {
+          "titel": "Teamgrootte",
+          "beschrijving": "Elk team bestaat uit 6-10 deelnemers. Vervangingen zijn toegestaan tot 15 minuten voor de start van het toernooi."
+        },
+        {
+          "titel": "Leeftijdsgroepen",
+          "beschrijving": "Het toernooi is verdeeld in twee categorieën: Groep 4/5/6 (middenbouw) en Groep 6/7/8 (bovenbouw). Elk team speelt alleen tegen teams uit dezelfde categorie."
+        }
+      ]
+    },
+    {
+      "title": "Spelverloop",
+      "items": [
+        {
+          "titel": "Start van het spel",
+          "beschrijving": "Per team mogen er 6 actieve spelers deelnemen. De overige spelers mogen ingezet worden als wissels. Alle actieve spelers starten tegelijkertijd. Het signaal wordt gegeven door de scheidsrechter. Teams mogen pas beginnen na het startsignaal."
+        },
+        {
+          "titel": "Spelduur",
+          "beschrijving": "Elke ronde duurt 4 minuten. Tijdens deze tijd proberen teams zo lang mogelijk in de apenkooi te blijven zonder de grond te raken of te worden getikt."
+        },
+        {
+          "titel": "Eliminatie",
+          "beschrijving": "Een speler is uitgeschakeld zodra hij/zij de grond raakt met enig deel van het lichaam of wordt getikt. Uitgeschakelde spelers verlaten direct het speelveld."
+        },
+        {
+          "titel": "Winnen",
+          "beschrijving": "Het tikkende team kan punten verdienen door de renners te tikken. Ze kunnen ook minpunten krijgen als ze op de grond komen bijvoorbeeld. De regels worden aan het begin elke categorie uitgebreid uitgelegd. Aan het einde van alle rondes wordt het totaal aantal punten per team berekend. Het team met de meeste punten wint."
+        }
+      ]
+    },
+    {
+      "title": "Veiligheids\u00adregels",
+      "items": [
+        {
+          "titel": "Kleding",
+          "beschrijving": "Alle deelnemers dragen verplicht sportschoenen met goede grip. Geen sieraden, horloges of andere voorwerpen die kunnen blijven haken."
+        },
+        {
+          "titel": "Toezicht",
+          "beschrijving": "Elke apenkooi heeft minimaal 2 begeleiders die toezicht houden op de veiligheid. Zij kunnen het spel stoppen bij gevaarlijke situaties."
+        },
+        {
+          "titel": "Eerste hulp",
+          "beschrijving": "Er is altijd een EHBO'er aanwezig tijdens het toernooi. Bij verwondingen wordt het spel onmiddellijk gestopt."
+        },
+        {
+          "titel": "Materiaal",
+          "beschrijving": "Alle toestellen worden vooraf gecontroleerd op veiligheid. Beschadigde toestellen worden niet gebruikt."
+        }
+      ]
+    },
+    {
+      "title": "Fair play regels",
+      "items": [
+        {
+          "titel": "Eerlijk spelen",
+          "beschrijving": "Spelers mogen elkaar niet duwen, trekken of op andere wijze hinderen. Alleen eigen vaardigheden en teamwork tellen."
+        },
+        {
+          "titel": "Respect",
+          "beschrijving": "Alle deelnemers tonen respect naar elkaar, de begeleiders en de scheidsrechters. Ongepast gedrag kan leiden tot diskwalificatie."
+        },
+        {
+          "titel": "Scheidsrechter",
+          "beschrijving": "De beslissingen van de scheidsrechter zijn bindend. Protesten kunnen na het spel worden ingediend bij de wedstrijdleiding."
+        }
+      ]
+    },
+    {
+      "title": "Praktische informatie",
+      "items": [
+        {
+          "titel": "Inschrijving",
+          "beschrijving": "Teams moeten zich uiterlijk 1,5 week voor het toernooi inschrijven. Late inschrijvingen worden alleen geaccepteerd bij vrije plaatsen."
+        },
+        {
+          "titel": "Aanwezigheid",
+          "beschrijving": "Teams moeten 15 minuten voor aanvang aanwezig zijn. Zo kunnen we op tijd beginnen met de warming-up en het de uitleg van de regels."
+        },
+        {
+          "titel": "Materiaal",
+          "beschrijving": "Alle benodigde materialen worden door de organisatie verzorgd. Teams hoeven niets mee te nemen behalve sportkleding en -schoenen."
+        },
+        {
+          "titel": "Prijzen",
+          "beschrijving": "De winnaar van elke categorie ontvangt een prijs."
+        }
+      ]
+    }
+  ]
+}

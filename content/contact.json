@@ -1,0 +1,17 @@
+{
+  "title": "Contact",
+  "subtitle": "Heb je vragen? Neem contact met ons op!",
+  "contact": {
+    "email": "info@apenkooitoernooi.nl",
+    "phone": "06-43118346",
+    "adres": "Sportpark H.G.V., Hengelo",
+    "social": {
+      "facebook": [
+        "https://www.facebook.com/apenkooitoernooi",
+        "https://www.facebook.com/HGVHengelo/"
+      ],
+      "instagram": "https://www.instagram.com/sportvereniginghgv/"
+    }
+  },
+  "openingstijden": "Maandag t/m vrijdag: 9:00 - 17:00"
+}

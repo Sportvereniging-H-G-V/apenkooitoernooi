@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+.output/
+.astro/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+submissions.jsonl
+
+# Cloudflare/Wrangler
+.wrangler/
+wrangler.toml.ci
+wrangler.name.ci.toml
+.dev.vars
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp

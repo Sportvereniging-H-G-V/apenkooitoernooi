@@ -1,0 +1,176 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const site = await import('../../content/site.json');
+---
+<Base title="404 - Pagina niet gevonden - Apenkooitoernooi">
+  <Header title={site.default.brand} />
+  
+  <!-- 404 Hero sectie -->
+  <section class="relative py-20 sm:py-24 md:py-32 overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute inset-0">
+      <div class="absolute top-10 left-10 w-32 h-32 bg-primary-200/30 rounded-full blur-2xl"></div>
+      <div class="absolute top-32 right-20 w-24 h-24 bg-blue-200/30 rounded-full blur-xl"></div>
+      <div class="absolute bottom-20 left-1/4 w-40 h-40 bg-orange-200/20 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
+      <!-- Apen emoji's -->
+      <div class="text-6xl sm:text-7xl md:text-8xl mb-8 animate-bounce">
+        <span class="inline-block">🐵</span>
+        <span class="inline-block animate-pulse delay-75">🦍</span>
+        <span class="inline-block animate-bounce delay-150">🐒</span>
+        <span class="inline-block animate-pulse delay-200">🦧</span>
+      </div>
+      
+      <!-- 404 nummer -->
+      <h1 class="text-8xl sm:text-9xl md:text-[12rem] font-bold text-primary-600 mb-4 sm:mb-6 leading-none">
+        404
+      </h1>
+      
+      <!-- Titel -->
+      <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 sm:mb-8 leading-tight">
+        Pagina niet gevonden 🤸
+      </h2>
+      
+      <!-- Beschrijving -->
+      <p class="text-lg sm:text-xl md:text-2xl text-slate-600 leading-relaxed max-w-3xl mx-auto mb-8 sm:mb-12">
+        Oeps! Deze pagina is wegge-<span class="font-semibold text-primary-600">slingerd</span> of over de toestellen geklommen. 
+        We hebben deze link niet kunnen vinden tijdens het <span class="font-semibold text-primary-600">apenkooi</span> spelen! 🏃
+      </p>
+      
+      <!-- Actie buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a 
+          href="/" 
+          class="inline-flex items-center px-8 py-4 bg-primary-600 text-white rounded-xl font-semibold text-lg hover:bg-primary-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 shadow-md"
+        >
+          🏠 Terug naar home
+        </a>
+        <a 
+          href="/inschrijven" 
+          class="inline-flex items-center px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold text-lg hover:bg-blue-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 shadow-md"
+        >
+          🚀 Inschrijven
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Help sectie -->
+  <section class="py-16 sm:py-20 md:py-24 -mt-4">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+          Wat zoek je? 🤸
+        </h3>
+        <div class="w-24 h-1 bg-primary-600 mx-auto"></div>
+      </div>
+      
+      <div class="grid sm:grid-cols-2 gap-6">
+        <!-- Link 1 -->
+        <a 
+          href="/inschrijven" 
+          class="group bg-gradient-to-br from-primary-50 to-blue-50 rounded-2xl p-6 sm:p-8 border border-primary-200 hover:shadow-xl hover:border-primary-400 transition-all duration-300"
+        >
+          <div class="text-4xl mb-4">🚀</div>
+          <h4 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">
+            Inschrijven
+          </h4>
+          <p class="text-slate-600">
+            Schrijf je team in voor het apenkooitoernooi
+          </p>
+        </a>
+        
+        <!-- Link 2 -->
+        <a 
+          href="/spelregels" 
+          class="group bg-gradient-to-br from-blue-50 to-slate-50 rounded-2xl p-6 sm:p-8 border border-blue-200 hover:shadow-xl hover:border-blue-400 transition-all duration-300"
+        >
+          <div class="text-4xl mb-4">📋</div>
+          <h4 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+            Spelregels
+          </h4>
+          <p class="text-slate-600">
+            Bekijk de spelregels en voorwaarden
+          </p>
+        </a>
+        
+        <!-- Link 3 -->
+        <a 
+          href="/contact" 
+          class="group bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-6 sm:p-8 border border-green-200 hover:shadow-xl hover:border-green-400 transition-all duration-300"
+        >
+          <div class="text-4xl mb-4">📧</div>
+          <h4 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-green-600 transition-colors">
+            Contact
+          </h4>
+          <p class="text-slate-600">
+            Stel je vraag of neem contact op
+          </p>
+        </a>
+        
+        <!-- Link 4 -->
+        <a 
+          href="/faq" 
+          class="group bg-gradient-to-br from-orange-50 to-primary-50 rounded-2xl p-6 sm:p-8 border border-orange-200 hover:shadow-xl hover:border-orange-400 transition-all duration-300"
+        >
+          <div class="text-4xl mb-4">❓</div>
+          <h4 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-orange-600 transition-colors">
+            FAQ
+          </h4>
+          <p class="text-slate-600">
+            Veelgestelde vragen over het toernooi
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Grappige sectie -->
+  <section class="py-12 sm:py-16 -mt-4">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200">
+        <div class="text-5xl mb-4">🏃</div>
+        <p class="text-lg sm:text-xl text-slate-700 italic">
+          "Deze pagina hebben we niet gevonden tijdens het apenkooi spelen! 
+          Misschien is hij wel over de toestellen geklommen en weggerend? 🤸"
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <Footer org={site.default.org} contact={site.default.contact} />
+</Base>
+
+<style>
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .animate-bounce {
+    animation: bounce 2s infinite;
+  }
+  
+  .delay-75 {
+    animation-delay: 0.75s;
+  }
+  
+  .delay-150 {
+    animation-delay: 1.5s;
+  }
+  
+  .delay-200 {
+    animation-delay: 2s;
+  }
+</style>
+
+

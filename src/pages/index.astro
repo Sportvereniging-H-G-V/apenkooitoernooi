@@ -1,0 +1,344 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import FAQ from '../components/FAQ.astro';
+import Turnstile from '../components/Turnstile.astro';
+import InschrijfModal from '../components/InschrijfModal.astro';
+import { pickVariant } from '../lib/abVariant';
+
+const site = await import('../../content/site.json');
+const home = await import('../../content/home.json');
+const { v, setCookie } = pickVariant(Astro.request.headers.get('cookie') || '');
+Astro.response.headers.set('Set-Cookie', setCookie);
+---
+<Base title="Apenkooitoernooi voor basisscholen — inschrijvingen, spelregels & informatie">
+  <Header title={site.default.brand} />
+  
+  <Hero 
+    eyebrow={home.default.hero.eyebrow}
+    title={home.default.hero.title}
+    subtitle={home.default.hero.subtitle}
+    lead={home.default.hero.lead}
+    backgroundImage={home.default.hero.heroImage}
+    ctas={home.default.hero.ctas}
+  />
+  
+  <!-- Wat is het Apenkooitoernooi? -->
+  <section class="py-12 sm:py-16 md:py-20 -mt-4">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
+        <div>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4 sm:mb-5 md:mb-6">{home.default.whatIs.title}</h2>
+          <p class="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed">{home.default.whatIs.body}</p>
+        </div>
+            <div class="bg-slate-100 rounded-2xl p-4 sm:p-6 md:p-8 text-center overflow-hidden">
+              <div class="w-full h-48 sm:h-56 md:h-64 rounded-xl overflow-hidden">
+                <img 
+                  src="/images/homepage/zaal-overzicht-800w.avif" 
+                  srcset="/images/homepage/zaal-overzicht-400w.avif 400w, /images/homepage/zaal-overzicht-800w.avif 800w, /images/homepage/zaal-overzicht-1200w.avif 1200w"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
+                  alt="Overzichtsbeeld van zaal met apenkooi toestellen"
+                  class="w-full h-full object-cover rounded-xl"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Voor wie organiseren we dit? -->
+  <section class="py-12 sm:py-16 md:py-20 -mt-4">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10 sm:mb-12 md:mb-16">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-3 sm:mb-4 px-2">{home.default.forWho.title}</h2>
+        <p class="text-base sm:text-lg md:text-xl text-slate-600 px-2">{home.default.forWho.subtitle}</p>
+      </div>
+      
+      <div class="grid sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+        {home.default.forWho.tournaments.map((tournament, index) => (
+          <div class="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg border border-slate-200">
+            <div class="text-center mb-4 sm:mb-5 md:mb-6">
+              <div class="bg-slate-100 rounded-xl p-2 sm:p-3 md:p-4 mb-3 sm:mb-4 overflow-hidden">
+                <div class="w-full h-48 sm:h-60 md:h-72 rounded-lg overflow-hidden">
+                  <img 
+                    src={index === 0 ? "/images/homepage/leeftijdsgroep-4-6-800w.avif" : "/images/homepage/leeftijdsgroep-6-8-800w.avif"}
+                    srcset={index === 0 ? "/images/homepage/leeftijdsgroep-4-6-400w.avif 400w, /images/homepage/leeftijdsgroep-4-6-800w.avif 800w, /images/homepage/leeftijdsgroep-4-6-1200w.avif 1200w" : "/images/homepage/leeftijdsgroep-6-8-400w.avif 400w, /images/homepage/leeftijdsgroep-6-8-800w.avif 800w, /images/homepage/leeftijdsgroep-6-8-1200w.avif 1200w"}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px"
+                    alt={index === 0 ? "Groep 4-6 kinderen in actie" : "Groep 6-8 kinderen in actie"}
+                    class="w-full h-full object-cover object-center rounded-lg"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+              <h3 class="text-xl sm:text-xl md:text-2xl font-bold text-slate-900 mb-3 sm:mb-4">{tournament.title}</h3>
+              <p class="text-sm sm:text-base text-slate-600 mb-4 sm:mb-5 md:mb-6">{tournament.description}</p>
+            </div>
+            {tournament.features && tournament.features.length > 0 && (
+              <ul class="space-y-2 sm:space-y-3">
+                {tournament.features.map((feature) => (
+                  <li class="flex items-start">
+                    <span class="text-green-500 mr-2 sm:mr-3 mt-1 flex-shrink-0">✓</span>
+                    <span class="text-sm sm:text-base text-slate-700 break-words">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <!-- Hoe werkt inschrijven? -->
+  <section class="py-12 sm:py-16 md:py-20 -mt-4">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
+            <div class="bg-slate-100 rounded-2xl p-4 sm:p-6 md:p-8 text-center overflow-hidden order-2 lg:order-1">
+              <div class="w-full h-56 sm:h-64 md:h-80 rounded-xl overflow-hidden">
+                <img 
+                  src="/images/homepage/inschrijving-formulier-800w.avif" 
+                  srcset="/images/homepage/inschrijving-formulier-400w.avif 400w, /images/homepage/inschrijving-formulier-800w.avif 800w, /images/homepage/inschrijving-formulier-1200w.avif 1200w"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  alt="Formulier/checklist voor inschrijving"
+                  class="w-full h-full object-cover object-center rounded-xl"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+        <div class="order-1 lg:order-2">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4 sm:mb-5 md:mb-6">{home.default.howToRegister.title}</h2>
+          <ol class="space-y-3 sm:space-y-4 mb-6 sm:mb-7 md:mb-8">
+            {home.default.howToRegister.steps.map((step, index) => (
+              <li class="flex items-start">
+                <span class="bg-primary-600 text-white rounded-full w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-xs sm:text-sm font-bold mr-3 sm:mr-4 flex-shrink-0">{index + 1}</span>
+                <span class="text-sm sm:text-base text-slate-700 break-words">{step}</span>
+              </li>
+            ))}
+          </ol>
+          <button 
+            type="button"
+            onclick="if (typeof window.openInschrijfModal === 'function') { window.openInschrijfModal('team'); }"
+            class="inline-flex items-center w-full sm:w-auto justify-center px-6 sm:px-8 py-3 sm:py-4 bg-primary-600 text-white rounded-xl font-semibold text-sm sm:text-base md:text-lg hover:bg-primary-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 shadow-md cursor-pointer"
+          >
+            {home.default.howToRegister.cta.label}
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Veilig & eerlijk spelen -->
+  <section class="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-green-50 to-blue-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
+        <div>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4 sm:mb-5 md:mb-6">{home.default.safety.title}</h2>
+          <p class="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed mb-6 sm:mb-7 md:mb-8">{home.default.safety.body}</p>
+          <a href={home.default.safety.cta.href} class="inline-flex items-center w-full sm:w-auto justify-center px-6 sm:px-8 py-3 sm:py-4 bg-green-600 text-white rounded-xl font-semibold text-sm sm:text-base md:text-lg hover:bg-green-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 shadow-md">
+            {home.default.safety.cta.label}
+          </a>
+        </div>
+            <div class="bg-slate-100 rounded-2xl p-4 sm:p-6 md:p-8 text-center overflow-hidden">
+              <img 
+                src="/images/homepage/leerkracht-toezicht-800w.avif" 
+                srcset="/images/homepage/leerkracht-toezicht-400w.avif 400w, /images/homepage/leerkracht-toezicht-800w.avif 800w, /images/homepage/leerkracht-toezicht-1200w.avif 1200w"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                alt="Leerkracht/scheidsrechter houdt toezicht"
+                class="w-full aspect-[16/10.8] object-cover object-[50%_30%] rounded-xl"
+                width="800"
+                height="600"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Veelgestelde vragen -->
+  <section class="py-12 sm:py-16 md:py-20 -mt-4">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-8 sm:mb-10 md:mb-12">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-3 sm:mb-4 px-2">{home.default.faq.title}</h2>
+      </div>
+      
+      <div class="space-y-4 sm:space-y-5 md:space-y-6 mb-6 sm:mb-7 md:mb-8">
+        {home.default.faq.questions.map((qa) => (
+          <div class="bg-slate-50 rounded-xl p-4 sm:p-5 md:p-6">
+            <h3 class="font-semibold text-sm sm:text-base text-slate-900 mb-2 break-words">{qa.question}</h3>
+            <p class="text-sm sm:text-base text-slate-600 break-words">→ {qa.answer}</p>
+          </div>
+        ))}
+      </div>
+      
+      <div class="text-center">
+        <a href={home.default.faq.cta.href} class="inline-flex items-center w-full sm:w-auto justify-center px-6 sm:px-8 py-3 sm:py-4 bg-slate-600 text-white rounded-xl font-semibold text-sm sm:text-base md:text-lg hover:bg-slate-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 shadow-md">
+          {home.default.faq.cta.label}
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Contact & updates -->
+  <section class="py-12 sm:py-16 md:py-20 -mt-4">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4 sm:mb-5 md:mb-6 px-2">{home.default.contact.title}</h2>
+      <p class="text-base sm:text-lg md:text-xl text-slate-600 mb-6 sm:mb-7 md:mb-8 px-2">{home.default.contact.body}</p>
+      
+      <div class="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl border border-slate-200">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+          <!-- Apenkooitoernooi Facebook -->
+          <a href="https://www.facebook.com/apenkooitoernooi" target="_blank" rel="noopener noreferrer" 
+             class="group flex flex-col items-center p-3 sm:p-4 md:p-6 bg-blue-50 rounded-xl hover:bg-blue-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div class="mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-xs sm:text-sm md:text-base text-slate-900 mb-1 sm:mb-2">Facebook</h3>
+            <p class="text-xs sm:text-sm text-slate-600 text-center break-words">Apenkooitoernooi</p>
+          </a>
+          
+          <!-- HGV Facebook -->
+          <a href="https://www.facebook.com/HGVHengelo/" target="_blank" rel="noopener noreferrer" 
+             class="group flex flex-col items-center p-3 sm:p-4 md:p-6 bg-blue-50 rounded-xl hover:bg-blue-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div class="mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-xs sm:text-sm md:text-base text-slate-900 mb-1 sm:mb-2">Facebook</h3>
+            <p class="text-xs sm:text-sm text-slate-600 text-center break-words">HGV Hengelo</p>
+          </a>
+          
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/sportvereniginghgv/" target="_blank" rel="noopener noreferrer" 
+             class="group flex flex-col items-center p-3 sm:p-4 md:p-6 bg-pink-50 rounded-xl hover:bg-pink-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div class="mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-pink-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-xs sm:text-sm md:text-base text-slate-900 mb-1 sm:mb-2">Instagram</h3>
+            <p class="text-xs sm:text-sm text-slate-600 text-center break-words">Sportvereniging HGV</p>
+          </a>
+          
+          <!-- Website -->
+          <a href="https://hgvhengelo.nl/" target="_blank" rel="noopener noreferrer" 
+             class="group flex flex-col items-center p-3 sm:p-4 md:p-6 bg-green-50 rounded-xl hover:bg-green-100 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+            <div class="mb-2 sm:mb-3 group-hover:scale-110 transition-transform duration-300">
+              <img src="/images/logo/hgv-logo.avif" alt="HGV Hengelo Logo" class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 object-contain" width="100" height="100" loading="lazy" decoding="async" />
+            </div>
+            <h3 class="font-semibold text-xs sm:text-sm md:text-base text-slate-900 mb-1 sm:mb-2">Website</h3>
+            <p class="text-xs sm:text-sm text-slate-600 text-center break-words">HGV Hengelo</p>
+          </a>
+        </div>
+        
+        <div class="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-slate-200">
+          <p class="text-sm sm:text-base text-slate-600 mb-3 sm:mb-4 px-2">Volg ons voor nieuwe speeldagen, foto's, uitslagen en inschrijfopeningen.</p>
+          <a href="/contact" class="inline-flex items-center w-full sm:w-auto justify-center px-4 sm:px-6 py-2.5 sm:py-3 bg-primary-600 text-white rounded-xl font-semibold text-sm sm:text-base hover:bg-primary-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 shadow-md">
+            📧 Contact opnemen
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Inschrijven CTA sectie -->
+  <section id="inschrijven" class="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4 sm:mb-5 md:mb-6 px-2">Klaar om in te schrijven?</h2>
+      <p class="text-base sm:text-lg md:text-xl text-slate-600 mb-6 sm:mb-7 md:mb-8 px-2">
+        Schrijf je team in voor het apenkooitoernooi. Beleef een onvergetelijke dag vol plezier en sportiviteit!
+      </p>
+      
+      <div class="max-w-3xl mx-auto mb-6 sm:mb-7 md:mb-8">
+        <!-- School Sporttoernooi kaart -->
+        <div class="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl border border-slate-200">
+          <div class="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-start">
+            <div class="text-left md:order-1">
+              <h3 class="text-xl sm:text-xl md:text-2xl font-bold text-slate-900 mb-3 sm:mb-4">🏆 School Sporttoernooi</h3>
+              <p class="text-sm sm:text-base text-slate-600 mb-3 sm:mb-4 break-words">
+                Voor basisschoolleerlingen van groep 1-4 en groep 5-8. Teams van 6-8 spelers strijden om de titel!
+              </p>
+              <ul class="space-y-1.5 sm:space-y-2 text-sm sm:text-base text-slate-600">
+                <li class="flex items-start">
+                  <span class="text-green-500 mr-2 flex-shrink-0">✓</span>
+                  <span class="break-words">Veilig en begeleid</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-green-500 mr-2 flex-shrink-0">✓</span>
+                  <span class="break-words">Duidelijke spelregels</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-green-500 mr-2 flex-shrink-0">✓</span>
+                  <span class="break-words">Prijzen voor winnaars</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center md:order-2">
+              <div class="bg-slate-100 rounded-xl p-4 sm:p-5 md:p-6 leading-none">
+                <img 
+                  src="/images/school-toernooi/kinderen-actie-toernooi-800w.avif" 
+                  srcset="/images/school-toernooi/kinderen-actie-toernooi-400w.avif 400w, /images/school-toernooi/kinderen-actie-toernooi-800w.avif 800w, /images/school-toernooi/kinderen-actie-toernooi-1200w.avif 1200w"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  alt="Kinderen in actie tijdens het apenkooitoernooi"
+                  class="w-full aspect-[4/3] object-cover object-[center_18%] rounded-lg"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+        <button 
+          type="button"
+          id="open-inschrijf-modal-btn"
+          class="inline-flex items-center w-full sm:w-auto justify-center px-6 sm:px-8 py-3 sm:py-4 bg-primary-600 text-white rounded-xl font-semibold text-sm sm:text-base md:text-lg hover:bg-primary-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 shadow-md cursor-pointer"
+        >
+          🚀 Nu inschrijven
+        </button>
+        <a href="/spelregels" class="inline-flex items-center w-full sm:w-auto justify-center px-6 sm:px-8 py-3 sm:py-4 bg-slate-600 text-white rounded-xl font-semibold text-sm sm:text-base md:text-lg hover:bg-slate-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 shadow-md">
+          📋 Spelregels bekijken
+        </a>
+        <a href="/contact" class="inline-flex items-center w-full sm:w-auto justify-center px-6 sm:px-8 py-3 sm:py-4 bg-slate-600 text-white rounded-xl font-semibold text-sm sm:text-base md:text-lg hover:bg-slate-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 shadow-md">
+          📧 Contact opnemen
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Inschrijf Modal -->
+  <InschrijfModal />
+  
+  <script>
+    // Open modal wanneer op "Nu inschrijven" button wordt geklikt
+    document.addEventListener('DOMContentLoaded', () => {
+      const openBtn = document.getElementById('open-inschrijf-modal-btn');
+      if (openBtn && typeof window.openInschrijfModal === 'function') {
+        openBtn.addEventListener('click', () => {
+          window.openInschrijfModal('team');
+        });
+      }
+    });
+  </script>
+  
+  <Footer org={site.default.org} contact={site.default.contact} />
+</Base>
