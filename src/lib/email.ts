@@ -209,9 +209,6 @@ async function sendToFreeScout(
   }
 
   try {
-    // Gebruik plain text parameter (moet altijd worden meegegeven)
-    const plainText = text || '';
-    
     // Valideer configuratie (dubbele check, maar dit zou niet moeten gebeuren)
     if (!apiUrl || !apiKey || !mailboxId) {
       console.error('❌ FreeScout configuratie incompleet');
@@ -290,7 +287,7 @@ async function sendToFreeScout(
     }
 
     return true;
-  } catch (err) {
+  } catch {
     // Log alleen error type, niet de volledige error (kan gevoelige data bevatten)
     console.error('❌ FreeScout API request failed');
     return false;
