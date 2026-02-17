@@ -150,17 +150,12 @@ export async function POST({ request, redirect, locals }: APIContext) {
   }
   
   // Probeer email te verzenden (email is altijd aanwezig omdat het verplicht is in alle formulieren)
-  let emailSent = false;
-  try {
-    emailSent = await sendMail(
-      emailSubject, 
-      parsed.data,
-      parsed.data.email,
-      env
-    );
-  } catch (error) {
-    throw error;
-  }
+  const emailSent = await sendMail(
+    emailSubject,
+    parsed.data,
+    parsed.data.email,
+    env
+  );
 
   // Voor contactformulier: geef JSON response in plaats van redirect
   if (parsed.data.formId === 'contact') {

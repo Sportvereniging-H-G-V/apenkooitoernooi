@@ -23,7 +23,7 @@ export async function appendJsonl(path: string, data: unknown, env?: CloudflareE
       const key = `submission-${Date.now()}-${Math.random().toString(36).substring(7)}`;
       await env.SUBMISSIONS.put(key, entry);
       return;
-    } catch (e) {
+    } catch {
       // Log alleen error type, niet de volledige error (kan gevoelige data bevatten)
       console.error('❌ Failed to write to KV');
     }
