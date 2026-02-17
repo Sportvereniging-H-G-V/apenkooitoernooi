@@ -35,6 +35,8 @@ jobs:
     needs: build
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - uses: actions/download-artifact@v4
         with:
