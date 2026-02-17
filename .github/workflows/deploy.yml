@@ -69,6 +69,7 @@ jobs:
         if: steps.deploy.conclusion == 'success'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
           DEPLOY_URL: ${{ steps.deploy.outputs.deployment-url }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
