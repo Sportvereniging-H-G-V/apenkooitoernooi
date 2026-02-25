@@ -270,7 +270,7 @@ export async function sendMail(
 ): Promise<boolean> {
   // Genereer HTML versie
   const html = formatEmailHtml(data);
-  // Verstuur via FreeScout API (gebruik text als primaire versie, html als fallback)
+  // Verstuur via FreeScout API (gebruik html als primaire versie)
   const sent = await sendToFreeScout(subject, html, customerEmail, env);
   if (sent) {
     return true;
