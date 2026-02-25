@@ -4,69 +4,30 @@ interface Env {
   FREESCOUT_MAILBOX_ID?: string;
 }
 
-/**
- * Genereert een plain text email template op basis van formulier data
- * Alles op aparte regels, geen HTML formatting
- */
-function formatEmailText(data: any): string {
-  const formId = data.formId || 'unknown';
-  
-  let text = `🐵 Nieuwe ${formId === 'team' ? 'Team' : formId === 'instuif' ? 'Instuif' : 'Contact'} Inschrijving\n`;
-
-  // Team formulier
-  if (formId === 'team') {
-    text += `\n📋 Team Informatie\n`;
-    text += `Teamnaam: ${data.teamnaam || 'Niet ingevuld'}\n`;
-    text += `\nLeeftijdsgroep: Groep ${data.leeftijdsgroep || 'Niet ingevuld'}\n`;
-    
-    text += `\n👤 Contactgegevens\n`;
-    text += `Contactpersoon: ${data.contactNaam || 'Niet ingevuld'}\n`;
-    text += `\nE-mailadres: ${data.email || 'Niet ingevuld'}\n`;
-    text += `\nTelefoonnummer: ${data.tel || 'Niet ingevuld'}\n`;
-    
-    text += `\n👥 Teamspelers (${data.deelnemers?.length || 0})\n`;
-    const spelers = (data.deelnemers || []).map((naam: string) => naam.trim()).filter((naam: string) => naam).join(' • ');
-    text += `${spelers}\n`;
-
-    if (data.opmerkingen) {
-      text += `\n💬 Opmerkingen\n`;
-      text += `${data.opmerkingen}\n`;
-    }
-  }
-  
-  // Instuif formulier
-  else if (formId === 'instuif') {
-    text += `\n👤 Deelnemer Informatie\n`;
-    text += `Naam: ${data.voornaam || ''} ${data.achternaam || ''}\n`;
-    text += `Leeftijdsgroep: Groep ${data.leeftijdsgroep || 'Niet ingevuld'}\n`;
-    text += `E-mailadres: ${data.email || 'Niet ingevuld'}\n`;
-
-    if (data.medisch) {
-      text += `\n🏥 Medische informatie\n`;
-      text += `${data.medisch}\n`;
-    }
-  }
-  
-  // Contact formulier
-  else if (formId === 'contact') {
-    text += `\n👤 Contactgegevens\n`;
-    text += `Naam: ${data.naam || 'Niet ingevuld'}\n`;
-    text += `E-mailadres: ${data.email || 'Niet ingevuld'}\n`;
-    
-    text += `\n💬 Bericht\n`;
-    text += `${data.bericht || 'Geen bericht'}\n`;
-  }
-
-  text += `\nDeze email is automatisch gegenereerd door het Apenkooitoernooi inschrijfsysteem.\n`;
-
-  return text;
+interface MailFormData {
+  formId?: string;
+  teamnaam?: string;
+  leeftijdsgroep?: string;
+  contactNaam?: string;
+  contactpersoon?: string;
+  email?: string;
+  tel?: string;
+  telefoon?: string;
+  deelnemers?: string[];
+  opmerkingen?: string;
+  voornaam?: string;
+  achternaam?: string;
+  medisch?: string;
+  naam?: string;
+  bericht?: string;
+  aanmelding_type?: string;
 }
 
 /**
  * Genereert een HTML email template op basis van formulier data
  * Met professionele styling voor betere weergave in email clients
  */
-function formatEmailHtml(data: any): string {
+function formatEmailHtml(data: MailFormData): string {
   const formId = data.formId || 'unknown';
   const formType = formId === 'team' ? 'Team' : 'Contact';
   
@@ -189,8 +150,7 @@ async function sendToFreeScout(
   subject: string,
   html: string,
   customerEmail: string,
-  env?: Env,
-  text?: string
+  env?: Env
 ): Promise<boolean> {
   const mailEnv = env || process.env;
   const apiUrl = mailEnv.FREESCOUT_API_URL;
@@ -304,15 +264,14 @@ async function sendToFreeScout(
  */
 export async function sendMail(
   subject: string,
-  data: any,
+  data: MailFormData,
   customerEmail: string,
   env?: Env
 ): Promise<boolean> {
-  // Genereer zowel plain text als HTML versies
-  const text = formatEmailText(data);
+  // Genereer HTML versie
   const html = formatEmailHtml(data);
-  // Verstuur via FreeScout API (gebruik text als primaire versie, html als fallback)
-  const sent = await sendToFreeScout(subject, html, customerEmail, env, text);
+  // Verstuur via FreeScout API (gebruik html als primaire versie)
+  const sent = await sendToFreeScout(subject, html, customerEmail, env);
   if (sent) {
     return true;
   }
