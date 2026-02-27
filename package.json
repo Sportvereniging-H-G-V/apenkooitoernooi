@@ -13,7 +13,7 @@
     "@astrojs/cloudflare": "^12.6.10",
     "@tailwindcss/postcss": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^8.8.0",
-    "@typescript-eslint/parser": "^8.8.0",
+    "@typescript-eslint/parser": "^8.56.1",
     "astro": "^5.16.5",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.11.1",
