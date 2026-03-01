@@ -140,7 +140,7 @@ export async function POST({ request, redirect, locals }: APIContext) {
   await appendJsonl('./submissions.jsonl', { ip, ...parsed.data }, env);
   
   // Bepaal email onderwerp op basis van formulier type
-  let emailSubject = '';
+  let emailSubject: string;
   if (parsed.data.formId === 'contact') {
     emailSubject = 'Apenkooitoernooi - Nieuw contactformulier ingevuld';
   } else if (parsed.data.formId === 'team') {
