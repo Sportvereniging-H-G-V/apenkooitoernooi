@@ -23,7 +23,7 @@
     "tailwindcss": "^4.0.0",
     "typescript": "^5.6.3",
     "vitest": "^4.0.0",
-    "wrangler": "^4.65.0"
+    "wrangler": "^4.69.0"
   },
   "dependencies": {
     "cookie": "^1.0.0",
