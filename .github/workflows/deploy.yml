@@ -33,7 +33,7 @@ jobs:
   deploy-preview:
     name: Deploy Preview
     needs: build
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' && github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
