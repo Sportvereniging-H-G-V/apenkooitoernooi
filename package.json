@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "@astrojs/cloudflare": "^12.6.12",
-    "@tailwindcss/postcss": "^4.0.0",
+    "@tailwindcss/postcss": "^4.2.1",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.56.1",
     "astro": "^5.16.5",
