@@ -44,6 +44,17 @@ jobs:
           name: build-output
           path: dist/
 
+      - name: Prepare deploy config
+        run: |
+          node -e "
+            const fs = require('fs');
+            const c = JSON.parse(fs.readFileSync('dist/server/wrangler.json', 'utf8'));
+            delete c.kv_namespaces;
+            delete c.images;
+            delete c.pages_build_output_dir;
+            fs.writeFileSync('dist/server/wrangler.json', JSON.stringify(c, null, 2));
+          "
+
       - name: Deploy to Cloudflare Workers
         id: deploy
         uses: cloudflare/wrangler-action@v3
@@ -96,6 +107,17 @@ jobs:
         with:
           name: build-output
           path: dist/
+
+      - name: Prepare deploy config
+        run: |
+          node -e "
+            const fs = require('fs');
+            const c = JSON.parse(fs.readFileSync('dist/server/wrangler.json', 'utf8'));
+            delete c.kv_namespaces;
+            delete c.images;
+            delete c.pages_build_output_dir;
+            fs.writeFileSync('dist/server/wrangler.json', JSON.stringify(c, null, 2));
+          "
 
       - name: Deploy to Cloudflare Workers
         id: deploy
