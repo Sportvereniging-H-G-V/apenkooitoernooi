@@ -51,7 +51,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: "4"
-          command: deploy --name apenkooitoernooi-pr-${{ github.event.pull_request.number }}
+          command: deploy --config dist/server/wrangler.json --name apenkooitoernooi-pr-${{ github.event.pull_request.number }}
 
       - name: Smoke test
         env:
@@ -104,7 +104,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: "4"
-          command: deploy
+          command: deploy --config dist/server/wrangler.json
 
       - name: Smoke test
         env:
