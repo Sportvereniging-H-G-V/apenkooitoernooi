@@ -38,18 +38,31 @@ jobs:
     permissions:
       pull-requests: write
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: build-output
           path: dist/
 
-      - name: Deploy to Cloudflare Pages
+      - name: Prepare deploy config
+        run: |
+          node -e "
+            const fs = require('fs');
+            const c = JSON.parse(fs.readFileSync('dist/server/wrangler.json', 'utf8'));
+            delete c.kv_namespaces;
+            delete c.images;
+            delete c.pages_build_output_dir;
+            fs.writeFileSync('dist/server/wrangler.json', JSON.stringify(c, null, 2));
+          "
+
+      - name: Deploy to Cloudflare Workers
         id: deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist/ --project-name=${{ vars.CF_PAGES_PROJECT }} --branch=${{ github.head_ref }}
+          wranglerVersion: "4"
+          command: deploy --config dist/server/wrangler.json --name apenkooitoernooi-pr-${{ github.event.pull_request.number }}
 
       - name: Smoke test
         env:
@@ -89,27 +102,41 @@ jobs:
     environment:
       name: production
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: build-output
           path: dist/
 
-      - name: Deploy to Cloudflare Pages
+      - name: Prepare deploy config
+        run: |
+          node -e "
+            const fs = require('fs');
+            const c = JSON.parse(fs.readFileSync('dist/server/wrangler.json', 'utf8'));
+            delete c.kv_namespaces;
+            delete c.images;
+            delete c.pages_build_output_dir;
+            fs.writeFileSync('dist/server/wrangler.json', JSON.stringify(c, null, 2));
+          "
+
+      - name: Deploy to Cloudflare Workers
+        id: deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist/ --project-name=${{ vars.CF_PAGES_PROJECT }} --branch=main
+          wranglerVersion: "4"
+          command: deploy --config dist/server/wrangler.json
 
       - name: Smoke test
         env:
           CF_PAGES_PRODUCTION_DOMAIN: ${{ vars.CF_PAGES_PRODUCTION_DOMAIN }}
-          CF_PAGES_PROJECT: ${{ vars.CF_PAGES_PROJECT }}
+          DEPLOY_URL: ${{ steps.deploy.outputs.deployment-url }}
         run: |
           if [ -n "$CF_PAGES_PRODUCTION_DOMAIN" ]; then
             URL="https://$CF_PAGES_PRODUCTION_DOMAIN"
           else
-            URL="https://$CF_PAGES_PROJECT.pages.dev"
+            URL="$DEPLOY_URL"
           fi
           for i in $(seq 1 10); do
             STATUS=$(curl -s -o /dev/null -w '%{http_code}' "$URL")
