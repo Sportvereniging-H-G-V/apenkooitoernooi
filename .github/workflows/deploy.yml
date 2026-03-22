@@ -49,7 +49,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist/ --project-name=${{ vars.CF_PAGES_PROJECT }} --branch=${{ github.head_ref }}
+          command: pages deploy --project-name=${{ vars.CF_PAGES_PROJECT }} --branch=${{ github.head_ref }}
 
       - name: Smoke test
         env:
@@ -99,7 +99,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist/ --project-name=${{ vars.CF_PAGES_PROJECT }} --branch=main
+          command: pages deploy --project-name=${{ vars.CF_PAGES_PROJECT }} --branch=main
 
       - name: Smoke test
         env:
