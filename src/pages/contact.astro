@@ -272,12 +272,36 @@ const turnstileSiteKey = '';
                   'error-callback': function(error) {
                     if (error === '110200' || error === 110200) {
                       const currentHost = window.location.host;
-                      container.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-lg p-3 text-red-800 text-sm"><p class="font-semibold mb-2">⚠️ Domein niet toegestaan</p><p class="mb-2">Het domein <code class="bg-red-100 px-1 rounded">' + currentHost + '</code> is niet toegevoegd aan de toegestane domeinen in Turnstile.</p><p class="text-xs">Voeg toe in Cloudflare Dashboard: Security → Turnstile → Je site → Domains</p></div>';
+                      const domainErrDiv = document.createElement('div');
+                      domainErrDiv.className = 'bg-red-50 border border-red-200 rounded-lg p-3 text-red-800 text-sm';
+                      const ep1 = document.createElement('p');
+                      ep1.className = 'font-semibold mb-2';
+                      ep1.textContent = '⚠️ Domein niet toegestaan';
+                      const ep2 = document.createElement('p');
+                      ep2.className = 'mb-2';
+                      ep2.appendChild(document.createTextNode('Het domein '));
+                      const eCode = document.createElement('code');
+                      eCode.className = 'bg-red-100 px-1 rounded';
+                      eCode.textContent = currentHost;
+                      ep2.appendChild(eCode);
+                      ep2.appendChild(document.createTextNode(' is niet toegevoegd aan de toegestane domeinen in Turnstile.'));
+                      const ep3 = document.createElement('p');
+                      ep3.className = 'text-xs';
+                      ep3.textContent = 'Voeg toe in Cloudflare Dashboard: Security → Turnstile → Je site → Domains';
+                      domainErrDiv.appendChild(ep1);
+                      domainErrDiv.appendChild(ep2);
+                      domainErrDiv.appendChild(ep3);
+                      container.innerHTML = '';
+                      container.appendChild(domainErrDiv);
                     }
                   }
                 });
               } catch (renderError) {
-                container.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-lg p-3 text-red-800 text-sm text-center">⚠️ Fout bij renderen van captcha: ' + renderError.message + '</div>';
+                const rErrDiv = document.createElement('div');
+              rErrDiv.className = 'bg-red-50 border border-red-200 rounded-lg p-3 text-red-800 text-sm text-center';
+              rErrDiv.textContent = '⚠️ Fout bij renderen van captcha: ' + (renderError instanceof Error ? renderError.message : 'Onbekende fout');
+              container.innerHTML = '';
+              container.appendChild(rErrDiv);
               }
             }
           } else {
