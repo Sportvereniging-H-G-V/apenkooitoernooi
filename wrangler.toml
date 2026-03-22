@@ -1,15 +1,5 @@
 name = "apenkooitoernooi"
 compatibility_date = "2024-04-03"
-main = "dist/server/entry.mjs"
-no_bundle = true
-
-[[rules]]
-type = "ESModule"
-globs = ["**/*.js", "**/*.mjs"]
-
-[assets]
-binding = "ASSETS"
-directory = "dist/client"
 
 # Environment variabelen
 # Voor publieke variabelen (PUBLIC_ prefix) - kunnen in wrangler.toml
