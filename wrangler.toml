@@ -1,13 +1,15 @@
 name = "apenkooitoernooi"
 compatibility_date = "2024-04-03"
-pages_build_output_dir = "dist"
+main = "dist/server/entry.mjs"
+no_bundle = true
 
-# KV Namespaces voor logging
-# Maak deze aan via: wrangler kv:namespace create "SUBMISSIONS"
-# [kv_namespaces]
-# binding = "SUBMISSIONS"
-# id = "your-kv-namespace-id"
-# preview_id = "your-preview-kv-namespace-id"
+[[rules]]
+type = "ESModule"
+globs = ["**/*.js", "**/*.mjs"]
+
+[assets]
+binding = "ASSETS"
+directory = "dist/client"
 
 # Environment variabelen
 # Voor publieke variabelen (PUBLIC_ prefix) - kunnen in wrangler.toml
@@ -24,4 +26,3 @@ PUBLIC_TURNSTILE_SITE_KEY = "0x4AAAAAAB_NNGt1RDkymzcu"
 # Secrets die moeten worden ingesteld:
 # - TURNSTILE_SECRET (gevoelig - alleen via Secrets)
 # - FREESCOUT_API_KEY (gevoelig - alleen via Secrets) - voor email verzending
-
