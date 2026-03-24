@@ -23,18 +23,7 @@ jobs:
           path: node_modules
           key: node-modules-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - run: npm ci || (rm -rf node_modules && npm install)
-      
-      # Verwijder wrangler.toml tijdelijk om Astro te dwingen Pages V2 (Directory mode) te gebruiken
-      # Zonder dit bestand genereert Astro een _worker.js in dist/client
-      - run: |
-          if [ -f wrangler.toml ]; then
-            mv wrangler.toml wrangler.toml.bak
-          fi
-          npm run build
-          if [ -f wrangler.toml.bak ]; then
-            mv wrangler.toml.bak wrangler.toml
-          fi
-
+      - run: npm run build
       - uses: actions/upload-artifact@v4
         with:
           name: build-output
@@ -61,8 +50,8 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # We deployen dist/client, waarin nu een _worker.js staat
-          command: pages deploy dist/client --project-name apenkooitoernooi --branch ${{ github.head_ref }}
+          # In Advanced mode voor Astro 6 op Pages: deploy de hele 'dist' folder
+          command: pages deploy dist --project-name apenkooitoernooi --branch ${{ github.head_ref }}
 
       - name: Smoke test
         env:
@@ -114,7 +103,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist/client --project-name apenkooitoernooi --branch main
+          command: pages deploy dist --project-name apenkooitoernooi --branch main
 
       - name: Smoke test
         env:

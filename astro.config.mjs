@@ -5,7 +5,7 @@ export default defineConfig({
   site: 'https://apenkooitoernooi.nl',
   output: 'server',
   adapter: cloudflare({
-    mode: 'directory',
+    mode: 'advanced',
   }),
   build: { 
     inlineStylesheets: 'auto',
