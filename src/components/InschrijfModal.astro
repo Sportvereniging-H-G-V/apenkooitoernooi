@@ -763,7 +763,6 @@
       
       const errorDiv = document.getElementById(`modal-form-error-${formType}`);
       const submitBtn = document.getElementById(`modal-submit-btn-${formType}`);
-      const widgetId = formType === 'team' ? widgetIdTeam : widgetIdInstuif;
       
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -773,6 +772,9 @@
           errorDiv.classList.add('hidden');
           errorDiv.textContent = '';
         }
+        
+        // Get current widget ID
+        const currentWidgetId = formType === 'team' ? widgetIdTeam : widgetIdInstuif;
         
         // Check of Turnstile token aanwezig is
         const turnstileInput = form.querySelector('input[name="cf-turnstile-response"]');
@@ -784,10 +786,10 @@
           const retryInput = form.querySelector('input[name="cf-turnstile-response"]');
           turnstileToken = retryInput ? retryInput.value : null;
           
-          if (!turnstileToken && widgetId !== null && typeof window.turnstile !== 'undefined') {
+          if (!turnstileToken && currentWidgetId !== null && typeof window.turnstile !== 'undefined') {
             try {
               console.log('[Turnstile] Resetten widget om nieuwe token te genereren...');
-              window.turnstile.reset(widgetId);
+              window.turnstile.reset(currentWidgetId);
               await new Promise(resolve => setTimeout(resolve, 1000));
               const resetInput = form.querySelector('input[name="cf-turnstile-response"]');
               turnstileToken = resetInput ? resetInput.value : null;
