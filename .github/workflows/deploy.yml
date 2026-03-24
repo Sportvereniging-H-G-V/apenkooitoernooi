@@ -44,25 +44,13 @@ jobs:
           name: build-output
           path: dist/
 
-      - name: Prepare deploy config
-        run: |
-          node -e "
-            const fs = require('fs');
-            const c = JSON.parse(fs.readFileSync('dist/server/wrangler.json', 'utf8'));
-            delete c.kv_namespaces;
-            delete c.images;
-            delete c.pages_build_output_dir;
-            fs.writeFileSync('dist/server/wrangler.json', JSON.stringify(c, null, 2));
-          "
-
-      - name: Deploy to Cloudflare Workers
+      - name: Deploy to Cloudflare Pages
         id: deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: "4"
-          command: deploy --config dist/server/wrangler.json --name apenkooitoernooi-pr-${{ github.event.pull_request.number }}
+          command: pages deploy dist --project-name apenkooitoernooi --branch ${{ github.head_ref }}
 
       - name: Smoke test
         env:
@@ -108,25 +96,13 @@ jobs:
           name: build-output
           path: dist/
 
-      - name: Prepare deploy config
-        run: |
-          node -e "
-            const fs = require('fs');
-            const c = JSON.parse(fs.readFileSync('dist/server/wrangler.json', 'utf8'));
-            delete c.kv_namespaces;
-            delete c.images;
-            delete c.pages_build_output_dir;
-            fs.writeFileSync('dist/server/wrangler.json', JSON.stringify(c, null, 2));
-          "
-
-      - name: Deploy to Cloudflare Workers
+      - name: Deploy to Cloudflare Pages
         id: deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: "4"
-          command: deploy --config dist/server/wrangler.json
+          command: pages deploy dist --project-name apenkooitoernooi --branch main
 
       - name: Smoke test
         env:
