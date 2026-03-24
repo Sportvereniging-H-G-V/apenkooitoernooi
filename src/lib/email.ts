@@ -213,20 +213,7 @@ async function sendToFreeScout(
       body: JSON.stringify(requestBody),
     });
 
-    // Als 403 met header, probeer GET parameter
-    if (response.status === 403) {
-      const urlWithKey = `${url}?api_key=${encodeURIComponent(apiKey)}`;
-      response = await fetch(urlWithKey, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      });
-    }
-
-    // Als nog steeds 403, probeer HTTP Basic Auth
+    // Als 403 met header, probeer HTTP Basic Auth
     if (response.status === 403) {
       const basicAuth = btoa(`${apiKey}:`);
       response = await fetch(url, {

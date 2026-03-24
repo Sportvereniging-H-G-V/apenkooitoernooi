@@ -670,7 +670,31 @@
                   console.error('[Turnstile] Error callback:', error);
                   if (error === '110200' || error === 110200) {
                     const currentHost = window.location.host;
-                    container.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-lg p-3 text-red-800 text-sm"><p class="font-semibold mb-2">⚠️ Domein niet toegestaan</p><p class="mb-2">Het domein <code class="bg-red-100 px-1 rounded">' + currentHost + '</code> is niet toegevoegd aan de toegestane domeinen in Turnstile.</p><p class="text-xs">Voeg toe in Cloudflare Dashboard: Security → Turnstile → Je site → Domains</p><p class="text-xs mt-1">Domeinen om toe te voegen: <code class="bg-red-100 px-1 rounded">localhost</code>, <code class="bg-red-100 px-1 rounded">127.0.0.1</code>, <code class="bg-red-100 px-1 rounded">localhost:4321</code></p></div>';
+                    const domainErrorDiv = document.createElement('div');
+                    domainErrorDiv.className = 'bg-red-50 border border-red-200 rounded-lg p-3 text-red-800 text-sm';
+                    const p1 = document.createElement('p');
+                    p1.className = 'font-semibold mb-2';
+                    p1.textContent = '⚠️ Domein niet toegestaan';
+                    const p2 = document.createElement('p');
+                    p2.className = 'mb-2';
+                    p2.appendChild(document.createTextNode('Het domein '));
+                    const code1 = document.createElement('code');
+                    code1.className = 'bg-red-100 px-1 rounded';
+                    code1.textContent = currentHost;
+                    p2.appendChild(code1);
+                    p2.appendChild(document.createTextNode(' is niet toegevoegd aan de toegestane domeinen in Turnstile.'));
+                    const p3 = document.createElement('p');
+                    p3.className = 'text-xs';
+                    p3.textContent = 'Voeg toe in Cloudflare Dashboard: Security → Turnstile → Je site → Domains';
+                    const p4 = document.createElement('p');
+                    p4.className = 'text-xs mt-1';
+                    p4.textContent = 'Domeinen om toe te voegen: localhost, 127.0.0.1, localhost:4321';
+                    domainErrorDiv.appendChild(p1);
+                    domainErrorDiv.appendChild(p2);
+                    domainErrorDiv.appendChild(p3);
+                    domainErrorDiv.appendChild(p4);
+                    container.innerHTML = '';
+                    container.appendChild(domainErrorDiv);
                   }
                 },
                 'expired-callback': function() {
@@ -696,7 +720,11 @@
               console.log('[Turnstile] Widget gerenderd met ID:', widgetId);
             } catch (renderError) {
               console.error('[Turnstile] Fout bij renderen:', renderError);
-              container.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-lg p-3 text-red-800 text-sm text-center">⚠️ Fout bij renderen van captcha: ' + renderError.message + '</div>';
+              const renderErrDiv = document.createElement('div');
+              renderErrDiv.className = 'bg-red-50 border border-red-200 rounded-lg p-3 text-red-800 text-sm text-center';
+              renderErrDiv.textContent = '⚠️ Fout bij renderen van captcha: ' + (renderError instanceof Error ? renderError.message : 'Onbekende fout');
+              container.innerHTML = '';
+              container.appendChild(renderErrDiv);
             }
           }
         } else {
@@ -705,7 +733,11 @@
         }
       } catch (err) {
         console.error('[Turnstile] Fout bij laden:', err);
-        container.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-lg p-3 text-red-800 text-sm text-center">⚠️ Fout bij laden van captcha: ' + (err instanceof Error ? err.message : String(err)) + '</div>';
+        const loadErrDiv = document.createElement('div');
+      loadErrDiv.className = 'bg-red-50 border border-red-200 rounded-lg p-3 text-red-800 text-sm text-center';
+      loadErrDiv.textContent = '⚠️ Fout bij laden van captcha: ' + (err instanceof Error ? err.message : String(err));
+      container.innerHTML = '';
+      container.appendChild(loadErrDiv);
       }
     }
     
