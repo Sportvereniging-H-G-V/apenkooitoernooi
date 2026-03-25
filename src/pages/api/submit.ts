@@ -40,10 +40,11 @@ export async function POST({ request, redirect, locals }: APIContext) {
   const env = runtimeEnv;
   
   // Voor Cloudflare Pages Functions: env is direct beschikbaar via runtime.env
-  // Fallback naar process.env voor local development
+  // Fallback naar import.meta.env of process.env voor local development (veilig)
   const turnstileSecret =
-    (typeof env?.TURNSTILE_SECRET === 'string' ? env.TURNSTILE_SECRET : undefined) ??
-    process.env.TURNSTILE_SECRET;
+    (typeof env?.TURNSTILE_SECRET === 'string' ? env.TURNSTILE_SECRET : undefined) ||
+    import.meta.env.TURNSTILE_SECRET ||
+    (typeof process !== 'undefined' ? process.env?.TURNSTILE_SECRET : undefined);
   
   if (!token) {
     return new Response(JSON.stringify({ error: 'Captcha token ontbreekt. Zorg ervoor dat de captcha is geladen en probeer het opnieuw.' }), { 

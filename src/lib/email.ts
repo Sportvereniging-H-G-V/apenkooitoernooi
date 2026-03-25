@@ -152,10 +152,16 @@ async function sendToFreeScout(
   customerEmail: string,
   env?: Env
 ): Promise<boolean> {
-  const mailEnv = env || process.env;
-  const apiUrl = mailEnv.FREESCOUT_API_URL;
-  const apiKey = mailEnv.FREESCOUT_API_KEY;
-  const mailboxId = mailEnv.FREESCOUT_MAILBOX_ID;
+  // Veilige fallback voor environment variabelen
+  const getEnv = (key: keyof Env) => {
+    return env?.[key] || 
+           import.meta.env?.[key] || 
+           (typeof process !== 'undefined' ? process.env?.[key] : undefined);
+  };
+
+  const apiUrl = getEnv('FREESCOUT_API_URL');
+  const apiKey = getEnv('FREESCOUT_API_KEY');
+  const mailboxId = getEnv('FREESCOUT_MAILBOX_ID');
 
   if (!apiUrl || !apiKey || !mailboxId || !customerEmail) {
     // Alleen loggen welke configuratie ontbreekt, niet de waarden zelf

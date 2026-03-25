@@ -4,11 +4,7 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: 'https://apenkooitoernooi.nl',
   output: 'server',
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true
-    }
-  }),
+  adapter: cloudflare(),
   build: { 
     inlineStylesheets: 'auto',
     assets: 'assets'
