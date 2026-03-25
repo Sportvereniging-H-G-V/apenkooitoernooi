@@ -44,14 +44,25 @@ jobs:
           name: build-output
           path: dist/
 
-      - name: Deploy to Cloudflare Pages
+      - name: Prepare deploy config
+        run: |
+          node -e "
+            const fs = require('fs');
+            const c = JSON.parse(fs.readFileSync('dist/server/wrangler.json', 'utf8'));
+            delete c.kv_namespaces;
+            delete c.images;
+            delete c.pages_build_output_dir;
+            fs.writeFileSync('dist/server/wrangler.json', JSON.stringify(c, null, 2));
+          "
+
+      - name: Deploy to Cloudflare Workers
         id: deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # In Advanced mode voor Astro 6 op Pages: deploy de hele 'dist' folder
-          command: pages deploy dist --project-name apenkooitoernooi --branch ${{ github.head_ref }}
+          wranglerVersion: "4"
+          command: deploy --config dist/server/wrangler.json --name apenkooitoernooi-pr-${{ github.event.pull_request.number }}
 
       - name: Smoke test
         env:
@@ -97,13 +108,25 @@ jobs:
           name: build-output
           path: dist/
 
-      - name: Deploy to Cloudflare Pages
+      - name: Prepare deploy config
+        run: |
+          node -e "
+            const fs = require('fs');
+            const c = JSON.parse(fs.readFileSync('dist/server/wrangler.json', 'utf8'));
+            delete c.kv_namespaces;
+            delete c.images;
+            delete c.pages_build_output_dir;
+            fs.writeFileSync('dist/server/wrangler.json', JSON.stringify(c, null, 2));
+          "
+
+      - name: Deploy to Cloudflare Workers
         id: deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name apenkooitoernooi --branch main
+          wranglerVersion: "4"
+          command: deploy --config dist/server/wrangler.json
 
       - name: Smoke test
         env:
