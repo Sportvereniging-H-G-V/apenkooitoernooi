@@ -1,5 +1,7 @@
 ---
 // InschrijfModal component - Modal met inschrijfformulier voor team en instuif
+// Site key is publiek (wordt sowieso in client HTML ingebed) - waarde uit wrangler.toml [vars]
+const turnstileSiteKey = '0x4AAAAAAB_NNGt1RDkymzcu';
 ---
 
 <!-- Modal overlay en container -->
@@ -272,7 +274,7 @@
         <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
         
         <!-- Cloudflare Turnstile -->
-        <div id="modal-turnstile-container-team" class="flex justify-center"></div>
+        <div id="modal-turnstile-container-team" class="flex justify-center" data-sitekey={turnstileSiteKey}></div>
         
         <!-- Error message container -->
         <div id="modal-form-error-team" class="hidden bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4 text-red-800 text-sm"></div>
@@ -407,7 +409,7 @@
         <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
         
         <!-- Cloudflare Turnstile -->
-        <div id="modal-turnstile-container-instuif" class="flex justify-center"></div>
+        <div id="modal-turnstile-container-instuif" class="flex justify-center" data-sitekey={turnstileSiteKey}></div>
         
         <!-- Error message container -->
         <div id="modal-form-error-instuif" class="hidden bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4 text-red-800 text-sm"></div>
@@ -615,17 +617,12 @@
       if (!form || !container || widgetLoaded) return;
       
       try {
-        console.log('[Turnstile] Ophalen site key via API...');
-        const response = await fetch('/api/turnstile-key');
-        
-        if (!response.ok) {
-          throw new Error(`API response niet OK: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        console.log('[Turnstile] Site key ontvangen:', data.siteKey ? data.siteKey.substring(0, 20) + '...' : 'GEEN SITE KEY');
-        
-        if (data.siteKey && data.siteKey.length > 0) {
+        const resolvedSiteKey = container.dataset.sitekey || '';
+
+        console.log('[Turnstile] Site key:', resolvedSiteKey ? resolvedSiteKey.substring(0, 20) + '...' : 'GEEN SITE KEY');
+
+        if (resolvedSiteKey && resolvedSiteKey.length > 0) {
+          const data = { siteKey: resolvedSiteKey };
           // Wacht tot Turnstile script geladen is
           if (typeof window.turnstile === 'undefined') {
             console.log('[Turnstile] Wachten op Turnstile script...');

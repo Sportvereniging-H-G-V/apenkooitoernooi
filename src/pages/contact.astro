@@ -6,9 +6,8 @@ import Footer from '../components/Footer.astro';
 const site = await import('../../content/site.json');
 const contact = await import('../../content/contact.json');
 
-// Site key wordt runtime opgehaald via API endpoint
-// Dit voorkomt problemen met build-time vs runtime environment variables
-const turnstileSiteKey = '';
+// Site key is publiek (wordt sowieso in client HTML ingebed) - waarde uit wrangler.toml [vars]
+const turnstileSiteKey = '0x4AAAAAAB_NNGt1RDkymzcu';
 ---
 <Base title="Contact - Apenkooitoernooi">
   <Header title={site.default.brand} />
@@ -190,7 +189,7 @@ const turnstileSiteKey = '';
             <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
             
             <!-- Cloudflare Turnstile -->
-            <div id="turnstile-container" class="flex justify-center"></div>
+            <div id="turnstile-container" class="flex justify-center" data-sitekey={turnstileSiteKey}></div>
             <!-- Laad Turnstile script direct (eerder dan dynamisch) -->
             <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
             
@@ -227,12 +226,12 @@ const turnstileSiteKey = '';
         
         if (!form || !container) return;
         
-        // Haal site key op via API endpoint
+        // Lees site key uit data-attribute (gezet door SSR via Cloudflare runtime env)
         try {
-          const response = await fetch('/api/turnstile-key');
-          const data = await response.json();
-          
-          if (data.siteKey && data.siteKey.length > 0) {
+          const resolvedSiteKey = container.dataset.sitekey || '';
+
+          if (resolvedSiteKey && resolvedSiteKey.length > 0) {
+            const data = { siteKey: resolvedSiteKey };
             // Wacht tot Turnstile script geladen is (wordt al direct in HTML geladen)
             if (typeof window.turnstile === 'undefined') {
               // Wacht tot script geladen is (max 3 seconden)
