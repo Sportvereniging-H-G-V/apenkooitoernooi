@@ -2,12 +2,12 @@
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import type { CloudflareEnv } from '../lib/log';
 
 const site = await import('../../content/site.json');
 const contact = await import('../../content/contact.json');
 
 // Site key via runtime env (wrangler.toml [vars]) — werkt in SSR want frontmatter draait per request
-import type { CloudflareEnv } from '../lib/log';
 const cfLocals = Astro.locals as { runtime?: { env?: CloudflareEnv } };
 const turnstileSiteKey = cfLocals?.runtime?.env?.PUBLIC_TURNSTILE_SITE_KEY ||
                          import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
