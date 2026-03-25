@@ -6,9 +6,11 @@ import Footer from '../components/Footer.astro';
 const site = await import('../../content/site.json');
 const contact = await import('../../content/contact.json');
 
-// Site key is beschikbaar als build-time variabele vanuit wrangler.toml [vars]
-// Voor preview environments zonder build-time variabelen valt de client-script terug op de API
-const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+// Site key via runtime env (wrangler.toml [vars]) — werkt in SSR want frontmatter draait per request
+import type { CloudflareEnv } from '../lib/log';
+const cfLocals = Astro.locals as { runtime?: { env?: CloudflareEnv } };
+const turnstileSiteKey = cfLocals?.runtime?.env?.PUBLIC_TURNSTILE_SITE_KEY ||
+                         import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 ---
 <Base title="Contact - Apenkooitoernooi">
   <Header title={site.default.brand} />
@@ -227,20 +229,12 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
         
         if (!form || !container) return;
         
-        // Haal site key op: eerst uit data-attribute (build-time), dan via API (fallback voor preview)
+        // Lees site key uit data-attribute (gezet door SSR via Cloudflare runtime env)
         try {
-          let resolvedSiteKey = container.dataset.sitekey || '';
+          const resolvedSiteKey = container.dataset.sitekey || '';
 
-          if (!resolvedSiteKey) {
-            const response = await fetch('/api/turnstile-key');
-            if (!response.ok) throw new Error(`API fout: ${response.status}`);
-            const data = await response.json();
-            resolvedSiteKey = data.siteKey || '';
-          }
-
-          const data = { siteKey: resolvedSiteKey };
-
-          if (data.siteKey && data.siteKey.length > 0) {
+          if (resolvedSiteKey && resolvedSiteKey.length > 0) {
+            const data = { siteKey: resolvedSiteKey };
             // Wacht tot Turnstile script geladen is (wordt al direct in HTML geladen)
             if (typeof window.turnstile === 'undefined') {
               // Wacht tot script geladen is (max 3 seconden)

@@ -1,6 +1,9 @@
 ---
 // InschrijfModal component - Modal met inschrijfformulier voor team en instuif
-const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+import type { CloudflareEnv } from '../lib/log';
+const cfLocals = Astro.locals as { runtime?: { env?: CloudflareEnv } };
+const turnstileSiteKey = cfLocals?.runtime?.env?.PUBLIC_TURNSTILE_SITE_KEY ||
+                         import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 ---
 
 <!-- Modal overlay en container -->
@@ -616,15 +619,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
       if (!form || !container || widgetLoaded) return;
       
       try {
-        let resolvedSiteKey = container.dataset.sitekey || '';
-
-        if (!resolvedSiteKey) {
-          console.log('[Turnstile] Ophalen site key via API (fallback voor preview)...');
-          const response = await fetch('/api/turnstile-key');
-          if (!response.ok) throw new Error(`API response niet OK: ${response.status}`);
-          const data = await response.json();
-          resolvedSiteKey = data.siteKey || '';
-        }
+        const resolvedSiteKey = container.dataset.sitekey || '';
 
         console.log('[Turnstile] Site key:', resolvedSiteKey ? resolvedSiteKey.substring(0, 20) + '...' : 'GEEN SITE KEY');
 
