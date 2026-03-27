@@ -6,8 +6,9 @@ import { verifyCaptcha } from '../../lib/captcha';
 import { sendMail } from '../../lib/email';
 
 export async function POST({ request, redirect, locals }: APIContext) {
-  const ip = request.headers.get('x-forwarded-for')?.split(',')[0] || 
-             request.headers.get('cf-connecting-ip') || 
+  // Prefer Cloudflare's trusted cf-connecting-ip header over the spoofable x-forwarded-for
+  const ip = request.headers.get('cf-connecting-ip') ||
+             request.headers.get('x-forwarded-for')?.split(',')[0] ||
              'local';
   if (!rateLimit(ip)) {
     return new Response(JSON.stringify({ error: 'Te veel verzoeken. Wacht even en probeer het later opnieuw.' }), { 
@@ -39,10 +40,11 @@ export async function POST({ request, redirect, locals }: APIContext) {
   const env = runtimeEnv;
   
   // Voor Cloudflare Pages Functions: env is direct beschikbaar via runtime.env
-  // Fallback naar process.env voor local development
+  // Fallback naar import.meta.env of process.env voor local development (veilig)
   const turnstileSecret =
-    (typeof env?.TURNSTILE_SECRET === 'string' ? env.TURNSTILE_SECRET : undefined) ??
-    process.env.TURNSTILE_SECRET;
+    (typeof env?.TURNSTILE_SECRET === 'string' ? env.TURNSTILE_SECRET : undefined) ||
+    import.meta.env.TURNSTILE_SECRET ||
+    (typeof process !== 'undefined' ? process.env?.TURNSTILE_SECRET : undefined);
   
   if (!token) {
     return new Response(JSON.stringify({ error: 'Captcha token ontbreekt. Zorg ervoor dat de captcha is geladen en probeer het opnieuw.' }), { 

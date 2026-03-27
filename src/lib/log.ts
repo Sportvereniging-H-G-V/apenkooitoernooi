@@ -47,7 +47,7 @@ export async function appendJsonl(path: string, data: unknown, env?: CloudflareE
 
   // Fallback: log alleen samenvatting zonder gevoelige data (voor development/local)
   // In productie wordt dit niet gelogd omdat KV beschikbaar is
-  if (process.env.NODE_ENV !== 'production') {
+  if (!import.meta.env.PROD && (typeof process === 'undefined' || process.env?.NODE_ENV !== 'production')) {
     try {
       const data = JSON.parse(entry);
       // Log alleen formId en timestamp, geen persoonlijke data
