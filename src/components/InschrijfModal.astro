@@ -377,33 +377,60 @@
     async function loadTurnstile(type) {
       const container = type === 'team' ? containerTeam : containerInstuif;
       if (!container || (type === 'team' ? widgetLoadedTeam : widgetLoadedInstuif)) return;
-      
+
       try {
         const response = await fetch('/api/turnstile-key');
         const data = await response.json();
-        
+
         if (data.siteKey) {
+          // Wacht tot Turnstile script geladen is (max 3 seconden)
           if (typeof (window as any).turnstile === 'undefined') {
-            await new Promise(r => {
-              let i = setInterval(() => {
-                if (typeof (window as any).turnstile !== 'undefined') { clearInterval(i); r(null); }
+            await new Promise<void>((resolve, reject) => {
+              let attempts = 0;
+              const i = setInterval(() => {
+                attempts++;
+                if (typeof (window as any).turnstile !== 'undefined') {
+                  clearInterval(i);
+                  resolve();
+                } else if (attempts >= 30) {
+                  clearInterval(i);
+                  reject(new Error('Turnstile script niet geladen na 3 seconden'));
+                }
               }, 100);
             });
           }
-          
+
           if ((window as any).turnstile && container.children.length === 0) {
             const widgetDiv = document.createElement('div');
             container.appendChild(widgetDiv);
-            const wId = (window as any).turnstile.render(widgetDiv, {
-              sitekey: data.siteKey,
-              theme: 'light',
-              callback: () => {}
-            });
-            if (type === 'team') { widgetIdTeam = wId; widgetLoadedTeam = true; }
-            else { widgetIdInstuif = wId; widgetLoadedInstuif = true; }
+            try {
+              const currentHost = window.location.hostname;
+              const wId = (window as any).turnstile.render(widgetDiv, {
+                sitekey: data.siteKey,
+                theme: 'light',
+                callback: () => {},
+                'error-callback': (error: any) => {
+                  container.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-2xl p-4 text-red-800 text-sm text-center font-sans font-medium"><p class="font-bold mb-1">⚠️ Domein niet toegestaan</p><p>Het domein <code class="bg-red-100 px-1 rounded">' + currentHost + '</code> is niet toegevoegd aan de Turnstile-domeinen.</p></div>';
+                },
+                'expired-callback': () => {
+                  const widgetId = type === 'team' ? widgetIdTeam : widgetIdInstuif;
+                  if (widgetId !== null && (window as any).turnstile) {
+                    try { (window as any).turnstile.reset(widgetId); } catch(e) {}
+                  }
+                }
+              });
+              if (type === 'team') { widgetIdTeam = wId; widgetLoadedTeam = true; }
+              else { widgetIdInstuif = wId; widgetLoadedInstuif = true; }
+            } catch (renderError) {
+              container.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-2xl p-4 text-red-800 text-sm text-center font-sans font-medium">⚠️ Captcha kon niet worden geladen.</div>';
+            }
           }
+        } else {
+          container.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-2xl p-4 text-red-800 text-sm text-center font-sans font-medium">⚠️ Captcha niet beschikbaar: PUBLIC_TURNSTILE_SITE_KEY niet ingesteld.</div>';
         }
-      } catch (e) {}
+      } catch (err) {
+        container.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-2xl p-4 text-red-800 text-sm text-center font-sans font-medium">⚠️ Captcha kon niet worden geladen.</div>';
+      }
     }
     
     closeBtn?.addEventListener('click', closeModal);

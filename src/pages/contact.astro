@@ -177,43 +177,54 @@ const turnstileSiteKey = '';
           const data = await response.json();
           
           if (data.siteKey && data.siteKey.length > 0) {
-            // Wacht tot Turnstile script geladen is
+            // Wacht tot Turnstile script geladen is (max 3 seconden)
             if (typeof (window as any).turnstile === 'undefined') {
-              await new Promise((resolve) => {
+              await new Promise<void>((resolve, reject) => {
                 let attempts = 0;
                 const checkInterval = setInterval(() => {
                   attempts++;
-                  if (typeof (window as any).turnstile !== 'undefined' || attempts >= 30) {
+                  if (typeof (window as any).turnstile !== 'undefined') {
                     clearInterval(checkInterval);
-                    resolve(null);
+                    resolve();
+                  } else if (attempts >= 30) {
+                    clearInterval(checkInterval);
+                    reject(new Error('Turnstile script niet geladen na 3 seconden'));
                   }
                 }, 100);
               });
             }
-            
+
             // Render Turnstile widget
             if (typeof (window as any).turnstile !== 'undefined' && !widgetLoaded && container.children.length === 0) {
               widgetLoaded = true;
               const widgetDiv = document.createElement('div');
               widgetDiv.id = 'turnstile-widget';
               container.appendChild(widgetDiv);
-              
+
               try {
+                const currentHost = window.location.hostname;
                 widgetId = (window as any).turnstile.render(widgetDiv, {
                   sitekey: data.siteKey,
                   theme: 'light',
                   callback: function(token: string) { /* token ready */ },
                   'error-callback': function(error: any) {
-                    container.innerHTML = '<div class="text-red-500 text-xs text-center font-sans font-bold">⚠️ Captcha Error (' + error + ')</div>';
+                    container.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-2xl p-4 text-red-800 text-sm text-center font-sans font-medium"><p class="font-bold mb-1">⚠️ Domein niet toegestaan</p><p>Het domein <code class="bg-red-100 px-1 rounded">' + currentHost + '</code> is niet toegevoegd aan de Turnstile-domeinen.</p></div>';
+                  },
+                  'expired-callback': function() {
+                    if (widgetId !== null && (window as any).turnstile) {
+                      try { (window as any).turnstile.reset(widgetId); } catch(e) {}
+                    }
                   }
                 });
               } catch (renderError: any) {
-                container.innerHTML = '<div class="text-red-500 text-xs text-center font-sans font-bold">⚠️ Rendering Error</div>';
+                container.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-2xl p-4 text-red-800 text-sm text-center font-sans font-medium">⚠️ Captcha kon niet worden geladen.</div>';
               }
             }
+          } else {
+            container.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-2xl p-4 text-red-800 text-sm text-center font-sans font-medium">⚠️ Captcha niet beschikbaar: PUBLIC_TURNSTILE_SITE_KEY niet ingesteld.</div>';
           }
         } catch (err) {
-          container.innerHTML = '<div class="text-red-500 text-xs text-center font-sans font-bold">⚠️ Captcha Failed</div>';
+          container.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-2xl p-4 text-red-800 text-sm text-center font-sans font-medium">⚠️ Captcha kon niet worden geladen.</div>';
         }
         
         form.addEventListener('submit', async (e) => {
