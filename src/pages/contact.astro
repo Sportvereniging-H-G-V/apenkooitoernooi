@@ -6,8 +6,10 @@ import Footer from '../components/Footer.astro';
 const site = await import('../../content/site.json');
 const contact = await import('../../content/contact.json');
 
-// Site key wordt runtime opgehaald via API endpoint
-const turnstileSiteKey = '';
+// Haal Turnstile site key op aan server-side
+const runtimeEnv = (Astro.locals as any)?.runtime?.env;
+const turnstileSiteKey = runtimeEnv?.PUBLIC_TURNSTILE_SITE_KEY ||
+                         import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 ---
 <Base title="Contact - Apenkooitoernooi">
   <Header title={site.default.brand} />
@@ -138,7 +140,7 @@ const turnstileSiteKey = '';
             
             <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
             
-            <div id="turnstile-container" class="flex justify-center min-h-[65px]"></div>
+            <div id="turnstile-container" class="flex justify-center min-h-[65px]" data-sitekey={turnstileSiteKey}></div>
             <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
             
             <div id="form-error" class="hidden bg-red-50 border border-red-200 rounded-2xl p-5 text-red-800 text-sm font-sans font-medium animate-fade-in"></div>
@@ -171,12 +173,16 @@ const turnstileSiteKey = '';
         
         if (!form || !container) return;
         
-        // Haal site key op via API endpoint
+        // Probeer site key uit data-attribute (server-side gerenderd), fallback naar API
         try {
-          const response = await fetch('/api/turnstile-key');
-          const data = await response.json();
-          
-          if (data.siteKey && data.siteKey.length > 0) {
+          let siteKey = container.dataset.sitekey || '';
+          if (!siteKey) {
+            const response = await fetch('/api/turnstile-key');
+            const data = await response.json();
+            siteKey = data.siteKey || '';
+          }
+
+          if (siteKey && siteKey.length > 0) {
             // Wacht tot Turnstile script geladen is (max 3 seconden)
             if (typeof (window as any).turnstile === 'undefined') {
               await new Promise<void>((resolve, reject) => {
@@ -204,7 +210,7 @@ const turnstileSiteKey = '';
               try {
                 const currentHost = window.location.hostname;
                 widgetId = (window as any).turnstile.render(widgetDiv, {
-                  sitekey: data.siteKey,
+                  sitekey: siteKey,
                   theme: 'light',
                   callback: function(token: string) { /* token ready */ },
                   'error-callback': function(error: any) {

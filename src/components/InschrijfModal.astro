@@ -1,5 +1,9 @@
 ---
 // InschrijfModal component - Modal met inschrijfformulier voor team en instuif
+// Haal Turnstile site key op aan server-side zodat deze direct beschikbaar is voor de client
+const runtimeEnv = (Astro.locals as any)?.runtime?.env;
+const turnstileSiteKey = runtimeEnv?.PUBLIC_TURNSTILE_SITE_KEY ||
+                         import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 ---
 
 <!-- Modal overlay en container -->
@@ -199,7 +203,7 @@
           </div>
           
           <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
-          <div id="modal-turnstile-container-team" class="flex justify-center min-h-[65px]"></div>
+          <div id="modal-turnstile-container-team" class="flex justify-center min-h-[65px]" data-sitekey={turnstileSiteKey}></div>
           <div id="modal-form-error-team" class="hidden bg-red-50 border border-red-200 rounded-2xl p-5 text-red-800 text-sm font-sans font-medium animate-fade-in"></div>
           
           <button 
@@ -260,7 +264,7 @@
           </div>
           
           <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
-          <div id="modal-turnstile-container-instuif" class="flex justify-center min-h-[65px]"></div>
+          <div id="modal-turnstile-container-instuif" class="flex justify-center min-h-[65px]" data-sitekey={turnstileSiteKey}></div>
           <div id="modal-form-error-instuif" class="hidden bg-red-50 border border-red-200 rounded-2xl p-5 text-red-800 text-sm animate-fade-in"></div>
           
           <button type="submit" id="modal-submit-btn-instuif" class="btn-primary w-full !rounded-2xl group">
@@ -379,10 +383,15 @@
       if (!container || (type === 'team' ? widgetLoadedTeam : widgetLoadedInstuif)) return;
 
       try {
-        const response = await fetch('/api/turnstile-key');
-        const data = await response.json();
+        // Probeer site key uit data-attribute (server-side gerenderd), fallback naar API
+        let siteKey = container.dataset.sitekey || '';
+        if (!siteKey) {
+          const response = await fetch('/api/turnstile-key');
+          const data = await response.json();
+          siteKey = data.siteKey || '';
+        }
 
-        if (data.siteKey) {
+        if (siteKey) {
           // Wacht tot Turnstile script geladen is (max 3 seconden)
           if (typeof (window as any).turnstile === 'undefined') {
             await new Promise<void>((resolve, reject) => {
@@ -406,7 +415,7 @@
             try {
               const currentHost = window.location.hostname;
               const wId = (window as any).turnstile.render(widgetDiv, {
-                sitekey: data.siteKey,
+                sitekey: siteKey,
                 theme: 'light',
                 callback: () => {},
                 'error-callback': (error: any) => {
