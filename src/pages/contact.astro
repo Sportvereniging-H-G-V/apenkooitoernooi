@@ -6,13 +6,13 @@ import Footer from '../components/Footer.astro';
 const site = await import('../../content/site.json');
 const contact = await import('../../content/contact.json');
 
-// Haal Turnstile site key op aan server-side
+// Haal Turnstile site key op via Cloudflare Workers runtime env (Astro v6)
 let turnstileSiteKey = '';
 try {
-  const runtimeEnv = (Astro.locals as any)?.runtime?.env;
-  turnstileSiteKey = runtimeEnv?.PUBLIC_TURNSTILE_SITE_KEY || '';
+  const { env } = await import('cloudflare:workers');
+  turnstileSiteKey = (env as Record<string, unknown>)?.PUBLIC_TURNSTILE_SITE_KEY as string || '';
 } catch {
-  // Astro v6: Astro.locals.runtime.env is verwijderd
+  // Niet in Cloudflare Workers omgeving (bijv. lokale dev zonder wrangler)
 }
 if (!turnstileSiteKey) {
   turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';

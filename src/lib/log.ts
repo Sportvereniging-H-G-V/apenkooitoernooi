@@ -29,20 +29,17 @@ export async function appendJsonl(path: string, data: unknown, env?: CloudflareE
     }
   }
 
-  // Probeer ook via Astro.locals.runtime.env (Cloudflare adapter)
+  // Probeer ook via cloudflare:workers env (Astro v6)
   try {
-    interface RuntimeGlobal {
-      runtime?: { env?: CloudflareEnv };
-    }
-
-    const runtimeEnv = (globalThis as RuntimeGlobal).runtime?.env;
-    if (runtimeEnv?.SUBMISSIONS) {
+    const { env: cfEnv } = await import('cloudflare:workers');
+    const workersEnv = cfEnv as unknown as CloudflareEnv;
+    if (workersEnv?.SUBMISSIONS) {
       const key = `submission-${Date.now()}-${Math.random().toString(36).substring(7)}`;
-      await runtimeEnv.SUBMISSIONS.put(key, entry);
+      await workersEnv.SUBMISSIONS.put(key, entry);
       return;
     }
   } catch {
-    // Ignore
+    // Niet in Cloudflare Workers omgeving
   }
 
   // Fallback: log alleen samenvatting zonder gevoelige data (voor development/local)

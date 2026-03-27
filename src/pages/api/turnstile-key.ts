@@ -1,28 +1,19 @@
 import type { APIContext } from 'astro';
-import type { CloudflareEnv } from '../../lib/log';
 
 /**
  * API endpoint om Turnstile site key runtime op te halen
- * Dit is nodig omdat PUBLIC_* variabelen build-time worden geïnjecteerd,
- * maar voor preview environments die in GitLab CI worden gebouwd,
- * zijn Cloudflare environment variables niet beschikbaar tijdens build
+ * Leest de key uit Cloudflare Workers runtime env (wrangler.toml [vars])
  */
-export async function GET({ locals }: APIContext) {
-  // Probeer site key te krijgen via runtime environment
-  let runtimeSiteKey: string | undefined;
+export async function GET(_context: APIContext) {
+  let runtimeSiteKey = '';
   try {
-    interface LocalsWithRuntime {
-      runtime?: { env?: CloudflareEnv };
-    }
-    const env = (locals as LocalsWithRuntime | undefined)?.runtime?.env;
-    runtimeSiteKey = env?.PUBLIC_TURNSTILE_SITE_KEY as string | undefined;
+    const { env } = await import('cloudflare:workers');
+    runtimeSiteKey = (env as Record<string, unknown>)?.PUBLIC_TURNSTILE_SITE_KEY as string || '';
   } catch {
-    // Astro v6: locals.runtime.env is verwijderd
+    // Niet in Cloudflare Workers omgeving
   }
-
   const siteKey = runtimeSiteKey ||
                   import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ||
-                  (typeof process !== 'undefined' ? process.env.PUBLIC_TURNSTILE_SITE_KEY : undefined) ||
                   '';
   
   return new Response(JSON.stringify({ siteKey }), {

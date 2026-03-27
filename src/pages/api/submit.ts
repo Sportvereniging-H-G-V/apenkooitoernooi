@@ -31,15 +31,13 @@ export async function POST({ request, redirect, locals }: APIContext) {
     payload['cf-turnstile-response'] ||
     (form.get('cf-turnstile-response') as string | null);
   
-  // Cloudflare environment variabelen
+  // Cloudflare environment variabelen via cloudflare:workers (Astro v6)
   let cfEnv: CloudflareEnv | undefined;
   try {
-    interface LocalsWithRuntime {
-      runtime?: { env?: CloudflareEnv };
-    }
-    cfEnv = (locals as LocalsWithRuntime | undefined)?.runtime?.env;
+    const { env: workersEnv } = await import('cloudflare:workers');
+    cfEnv = workersEnv as unknown as CloudflareEnv;
   } catch {
-    // Astro v6: locals.runtime.env is verwijderd
+    // Niet in Cloudflare Workers omgeving
   }
   const env = cfEnv;
   
