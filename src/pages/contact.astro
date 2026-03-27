@@ -7,9 +7,16 @@ const site = await import('../../content/site.json');
 const contact = await import('../../content/contact.json');
 
 // Haal Turnstile site key op aan server-side
-const runtimeEnv = (Astro.locals as any)?.runtime?.env;
-const turnstileSiteKey = runtimeEnv?.PUBLIC_TURNSTILE_SITE_KEY ||
-                         import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+let turnstileSiteKey = '';
+try {
+  const runtimeEnv = (Astro.locals as any)?.runtime?.env;
+  turnstileSiteKey = runtimeEnv?.PUBLIC_TURNSTILE_SITE_KEY || '';
+} catch {
+  // Astro v6: Astro.locals.runtime.env is verwijderd
+}
+if (!turnstileSiteKey) {
+  turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+}
 ---
 <Base title="Contact - Apenkooitoernooi">
   <Header title={site.default.brand} />

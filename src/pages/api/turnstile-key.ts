@@ -9,16 +9,19 @@ import type { CloudflareEnv } from '../../lib/log';
  */
 export async function GET({ locals }: APIContext) {
   // Probeer site key te krijgen via runtime environment
-  interface LocalsWithRuntime {
-    runtime?: { env?: CloudflareEnv };
+  let runtimeSiteKey: string | undefined;
+  try {
+    interface LocalsWithRuntime {
+      runtime?: { env?: CloudflareEnv };
+    }
+    const env = (locals as LocalsWithRuntime | undefined)?.runtime?.env;
+    runtimeSiteKey = env?.PUBLIC_TURNSTILE_SITE_KEY as string | undefined;
+  } catch {
+    // Astro v6: locals.runtime.env is verwijderd
   }
-  const env = (locals as LocalsWithRuntime | undefined)?.runtime?.env;
-  
-  // Voor Cloudflare Pages: env variabelen zijn beschikbaar via runtime.env
-  // PUBLIC_* variabelen zijn ook beschikbaar in runtime.env voor Cloudflare Pages
-  // Voor lokale development: check ook process.env
-  const siteKey = env?.PUBLIC_TURNSTILE_SITE_KEY || 
-                  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || 
+
+  const siteKey = runtimeSiteKey ||
+                  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ||
                   (typeof process !== 'undefined' ? process.env.PUBLIC_TURNSTILE_SITE_KEY : undefined) ||
                   '';
   

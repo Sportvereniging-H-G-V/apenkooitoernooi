@@ -31,13 +31,17 @@ export async function POST({ request, redirect, locals }: APIContext) {
     payload['cf-turnstile-response'] ||
     (form.get('cf-turnstile-response') as string | null);
   
-  // Cloudflare environment variabelen - correct voor Cloudflare Pages Functions
-  // Astro Cloudflare adapter maakt env beschikbaar via locals.runtime.env
-  interface LocalsWithRuntime {
-    runtime?: { env?: CloudflareEnv };
+  // Cloudflare environment variabelen
+  let cfEnv: CloudflareEnv | undefined;
+  try {
+    interface LocalsWithRuntime {
+      runtime?: { env?: CloudflareEnv };
+    }
+    cfEnv = (locals as LocalsWithRuntime | undefined)?.runtime?.env;
+  } catch {
+    // Astro v6: locals.runtime.env is verwijderd
   }
-  const runtimeEnv = (locals as LocalsWithRuntime | undefined)?.runtime?.env;
-  const env = runtimeEnv;
+  const env = cfEnv;
   
   // Voor Cloudflare Pages Functions: env is direct beschikbaar via runtime.env
   // Fallback naar import.meta.env of process.env voor local development (veilig)
