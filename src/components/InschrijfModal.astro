@@ -5,7 +5,7 @@
 <!-- Modal overlay en container -->
 <div 
   id="inschrijf-modal" 
-  class="fixed inset-0 z-[100] hidden items-center justify-center p-4"
+  class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6"
   role="dialog"
   aria-modal="true"
   aria-labelledby="modal-title"
@@ -13,414 +13,264 @@
   <!-- Backdrop -->
   <div 
     id="modal-backdrop"
-    class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300"
+    class="fixed inset-0 bg-slate-900/60 backdrop-blur-md transition-opacity duration-500 opacity-0"
     aria-hidden="true"
   ></div>
   
   <!-- Modal content -->
-  <div class="relative z-10 w-full max-w-4xl max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
-    <!-- Header met sluit-knop -->
-    <div class="sticky top-0 bg-white border-b border-slate-200 px-4 sm:px-6 py-4 flex items-center justify-between z-10">
-      <h2 id="modal-title" class="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900">
-        Inschrijfformulier
-      </h2>
+  <div class="relative z-10 w-full max-w-4xl max-h-[90vh] bg-white rounded-[2.5rem] shadow-2xl overflow-hidden transform transition-all duration-500 scale-90 opacity-0 border border-white/20" id="modal-content">
+    
+    <!-- Header -->
+    <div class="sticky top-0 bg-white/80 backdrop-blur-lg border-b border-slate-100 px-6 sm:px-10 py-5 sm:py-6 flex items-center justify-between z-20">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-primary-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary-200">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h2 id="modal-title" class="text-2xl sm:text-3xl text-slate-900 leading-none">
+          Inschrijven
+        </h2>
+      </div>
       <button 
         id="modal-close-btn"
         type="button"
-        class="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-600 hover:text-slate-900"
+        class="p-2 rounded-xl hover:bg-slate-100 transition-all text-slate-400 hover:text-slate-900 hover:rotate-90"
         aria-label="Sluit modal"
       >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
     </div>
     
     <!-- Scrollable content -->
-    <div class="overflow-y-auto max-h-[calc(90vh-80px)] px-4 sm:px-6 py-4 sm:py-6">
-      <!-- Informatie blok -->
-      <div class="bg-white border-l-4 border-blue-400 p-4 sm:p-6 md:p-8 rounded-r-2xl shadow-xl border border-slate-200 mb-6">
-        <div class="flex items-start mb-3 sm:mb-4">
-          <span class="text-xl sm:text-2xl mr-3 sm:mr-4 flex-shrink-0">ℹ️</span>
-          <div class="min-w-0">
-            <h3 class="text-lg sm:text-xl font-semibold text-slate-900 mb-2 sm:mb-3">Belangrijke informatie</h3>
-            <p class="text-sm sm:text-base md:text-lg text-slate-700 leading-relaxed break-words">
-              Reserveer alvast de datum woensdag 25 februari 2026 voor de Apenkooi Toernooi 2026 in uw agenda. 
-              Hiervoor kan je vanaf 1 november opgeven via dit formulier.
+    <div class="overflow-y-auto max-h-[calc(90vh-90px)] px-6 sm:px-10 py-8 sm:py-10 bg-dot-pattern text-slate-100 opacity-100">
+      <div class="relative z-10">
+        <!-- Informatie blok -->
+        <div class="bg-gradient-to-br from-primary-600 to-accent-600 rounded-3xl p-6 sm:p-8 shadow-xl mb-10 text-white relative overflow-hidden group">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 group-hover:scale-110 transition-transform"></div>
+          <div class="flex items-start gap-4 sm:gap-6 relative">
+            <div class="bg-white/20 backdrop-blur-sm p-3 rounded-2xl">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            </div>
+            <div>
+              <h3 class="text-xl sm:text-2xl font-hotMustard mb-2 tracking-wide">Belangrijke informatie</h3>
+              <p class="text-base sm:text-lg text-white/90 leading-relaxed font-sans font-medium">
+                Reserveer alvast <span class="font-bold text-white underline decoration-white/30 underline-offset-4">woensdag 25 februari 2026</span> voor de Apenkooi Toernooi 2026 in uw agenda. 
+                Hiervoor kan je vanaf 1 november opgeven via dit formulier.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Team Inschrijfformulier -->
+        <form 
+          method="post" 
+          action="/api/submit" 
+          id="inschrijf-form-team"
+          class="space-y-10"
+        >
+          <input type="hidden" name="formId" value="team" />
+          
+          <div class="grid sm:grid-cols-2 gap-8">
+            <!-- Teamnaam -->
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">Naam van het team *</label>
+              <p class="text-sm text-slate-500 mb-4 font-sans font-medium">Bedenk hier een leuke teamnaam zoals Brulapen, Slingerapen of the Monkeys.</p>
+              <input 
+                name="teamnaam" 
+                placeholder="Hoe heet jullie team?" 
+                required 
+                class="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-primary-100 focus:border-primary-500 focus:bg-white transition-all outline-none font-sans font-bold text-lg" 
+              />
+            </div>
+            
+            <!-- Contactpersoon -->
+            <div>
+              <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">Contactpersoon *</label>
+              <p class="text-xs text-slate-500 mb-4 font-sans font-medium">Iemand van 16 jaar of ouder (begeleider).</p>
+              <input 
+                name="contactpersoon" 
+                placeholder="Naam begeleider" 
+                required 
+                class="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-primary-100 focus:border-primary-500 focus:bg-white transition-all outline-none font-sans font-medium" 
+              />
+            </div>
+            
+            <!-- E-mail -->
+            <div>
+              <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">E-mailadres *</label>
+              <p class="text-xs text-slate-500 mb-4 font-sans font-medium">Voor de bevestiging en het schema.</p>
+              <input 
+                name="email" 
+                type="email" 
+                placeholder="jouw@email.nl" 
+                required 
+                class="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-primary-100 focus:border-primary-500 focus:bg-white transition-all outline-none font-sans font-medium" 
+              />
+            </div>
+            
+            <!-- Telefoon -->
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">Telefoonnummer *</label>
+              <p class="text-xs text-slate-500 mb-4 font-sans font-medium">Voor de groepsapp met de laatste informatie.</p>
+              <input 
+                name="telefoon" 
+                type="tel" 
+                placeholder="06 12345678" 
+                required
+                minlength="6"
+                class="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-primary-100 focus:border-primary-500 focus:bg-white transition-all outline-none font-sans font-medium" 
+              />
+            </div>
+          </div>
+          
+          <!-- Aanmelding type -->
+          <div>
+            <label class="block text-sm font-bold text-slate-700 mb-4 uppercase tracking-wider">Leeftijdscategorie *</label>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <label class="flex items-center p-5 border-2 border-slate-100 rounded-2xl hover:bg-primary-50 hover:border-primary-200 cursor-pointer transition-all group has-[:checked]:bg-primary-50 has-[:checked]:border-primary-500">
+                <input 
+                  type="radio" 
+                  name="aanmelding_type" 
+                  value="Apenkooitoernooi categorie 1: Groep 4, 5, 6" 
+                  required 
+                  class="w-5 h-5 text-primary-600 focus:ring-primary-500 border-slate-300 transition-transform group-hover:scale-110" 
+                />
+                <div class="ml-4">
+                  <span class="block text-lg font-bold text-slate-900 leading-none mb-1">Categorie 1</span>
+                  <span class="block text-sm text-slate-500 font-sans font-medium">Groep 4, 5, 6</span>
+                </div>
+              </label>
+              <label class="flex items-center p-5 border-2 border-slate-100 rounded-2xl hover:bg-primary-50 hover:border-primary-200 cursor-pointer transition-all group has-[:checked]:bg-primary-50 has-[:checked]:border-primary-500">
+                <input 
+                  type="radio" 
+                  name="aanmelding_type" 
+                  value="Apenkooitoernooi categorie 2: Groep 6, 7, 8" 
+                  required 
+                  class="w-5 h-5 text-primary-600 focus:ring-primary-500 border-slate-300 transition-transform group-hover:scale-110" 
+                />
+                <div class="ml-4">
+                  <span class="block text-lg font-bold text-slate-900 leading-none mb-1">Categorie 2</span>
+                  <span class="block text-sm text-slate-500 font-sans font-medium">Groep 6, 7, 8</span>
+                </div>
+              </label>
+            </div>
+          </div>
+          
+          <!-- Teamspelers -->
+          <div>
+            <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">Teamspelers *</label>
+            <p class="text-sm text-slate-500 mb-6 font-sans font-medium leading-relaxed">
+              Vul hier minimaal 6 namen in. Maximaal 10 spelers per team (6 spelers per ronde + wissels).
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {Array.from({ length: 10 }).map((_, i) => (
+                <div class="relative group">
+                  <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 font-bold font-hotMustard group-focus-within:text-primary-400 transition-colors">{i + 1}</span>
+                  <input 
+                    type="text"
+                    name={`speler${i + 1}`} 
+                    placeholder={i < 6 ? "Naam speler *" : "Naam speler (optioneel)"} 
+                    required={i < 6} 
+                    minlength="2"
+                    class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-4 focus:ring-primary-100 focus:border-primary-500 focus:bg-white transition-all outline-none font-sans font-medium" 
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <!-- Opmerkingen -->
+          <div>
+            <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">Opmerkingen</label>
+            <textarea 
+              name="opmerkingen" 
+              placeholder="Zijn er nog dingen die we moeten weten?" 
+              rows="3"
+              class="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-primary-100 focus:border-primary-500 focus:bg-white transition-all outline-none resize-none font-sans font-medium" 
+            ></textarea>
+          </div>
+          
+          <!-- Voorwaarden -->
+          <div class="bg-amber-50 border border-amber-100 rounded-2xl p-6 shadow-sm">
+            <p class="text-sm text-amber-900 font-sans font-medium leading-relaxed">
+              Door te versturen ga je akkoord met de <a href="/voorwaarden" class="font-bold underline decoration-amber-300 hover:decoration-amber-600" target="_blank">voorwaarden</a> en <a href="/spelregels" class="font-bold underline decoration-amber-300 hover:decoration-amber-600" target="_blank">spelregels</a>.
             </p>
           </div>
-        </div>
-      </div>
-      
-      <!-- Team Inschrijfformulier -->
-      <form 
-        method="post" 
-        action="/api/submit" 
-        id="inschrijf-form-team"
-        class="grid gap-4 sm:gap-5 md:gap-6 bg-white p-4 sm:p-6 md:p-8 rounded-3xl shadow-2xl border border-slate-200"
-      >
-        <input type="hidden" name="formId" value="team" />
-        
-        <!-- Teamnaam -->
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1.5 sm:mb-2">
-            Naam van het team *
-          </label>
-          <p class="text-xs sm:text-sm text-slate-500 mb-2 sm:mb-3 break-words">
-            Bedenk hier een leuke teamnaam zoals Brulapen, Slingerapen of the Monkeys.
-          </p>
-          <input 
-            name="teamnaam" 
-            placeholder="Teamnaam" 
-            required 
-            class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" 
-          />
-        </div>
-        
-        <!-- Contactpersoon -->
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1.5 sm:mb-2">
-            Contactpersoon *
-          </label>
-          <p class="text-xs sm:text-sm text-slate-500 mb-2 sm:mb-3 break-words">
-            Hierbij iemand vermelden die 16 jaar of ouder is en verantwoordelijk is voor de hele groep.
-          </p>
-          <input 
-            name="contactpersoon" 
-            placeholder="Contactpersoon" 
-            required 
-            class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" 
-          />
-        </div>
-        
-        <!-- E-mail -->
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1.5 sm:mb-2">
-            E-mailadres *
-          </label>
-          <p class="text-xs sm:text-sm text-slate-500 mb-2 sm:mb-3 break-words">
-            Via dit e-mailadres versturen wij de bevestiging, informatie en het wedstrijdschema.
-          </p>
-          <input 
-            name="email" 
-            type="email" 
-            placeholder="E-mailadres" 
-            required 
-            class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" 
-          />
-        </div>
-        
-        <!-- Telefoon -->
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1.5 sm:mb-2">
-            Telefoonnummer *
-          </label>
-          <p class="text-xs sm:text-sm text-slate-500 mb-2 sm:mb-3 break-words">
-            De laatste informatie sturen wij via een groepsapp.
-          </p>
-          <input 
-            name="telefoon" 
-            type="tel" 
-            placeholder="Telefoonnummer" 
-            required
-            minlength="6"
-            class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" 
-          />
-        </div>
-        
-        <!-- Aanmelding type -->
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-3 sm:mb-4">
-            Ik wil mij aanmelden voor *
-          </label>
-          <div class="space-y-2 sm:space-y-3">
-            <label class="flex items-start p-3 sm:p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
-              <input 
-                type="radio" 
-                name="aanmelding_type" 
-                value="Apenkooitoernooi categorie 1: Groep 4, 5, 6" 
-                required 
-                class="mr-3 mt-1 text-primary-600 focus:ring-primary-500 flex-shrink-0" 
-              />
-              <span class="text-sm sm:text-base text-slate-700 break-words">Apenkooitoernooi categorie 1: Groep 4, 5, 6</span>
-            </label>
-            <label class="flex items-start p-3 sm:p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
-              <input 
-                type="radio" 
-                name="aanmelding_type" 
-                value="Apenkooitoernooi categorie 2: Groep 6, 7, 8" 
-                required 
-                class="mr-3 mt-1 text-primary-600 focus:ring-primary-500 flex-shrink-0" 
-              />
-              <span class="text-sm sm:text-base text-slate-700 break-words">Apenkooitoernooi categorie 2: Groep 6, 7, 8</span>
-            </label>
-          </div>
-        </div>
-        
-        <!-- Teamspelers -->
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1.5 sm:mb-2">
-            Namen van alle teamspelers *
-          </label>
-          <p class="text-xs sm:text-sm text-slate-500 mb-2 sm:mb-3 break-words">
-            Vul hier minimaal 6 voornamen in van de deelnemers.<br class="hidden sm:block">
-            Een team kan maximaal uit 10 spelers bestaan. Per ronde doen er 6 spelers mee, de rest van de spelers kun je gebruiken als wissels.
-          </p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-            <!-- Speler 1-6 (verplicht) -->
-            <input 
-              type="text"
-              name="speler1" 
-              placeholder="Speler 1 *" 
-              required 
-              minlength="2"
-              class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" 
-            />
-            <input 
-              type="text"
-              name="speler2" 
-              placeholder="Speler 2 *" 
-              required 
-              minlength="2"
-              class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" 
-            />
-            <input 
-              type="text"
-              name="speler3" 
-              placeholder="Speler 3 *" 
-              required 
-              minlength="2"
-              class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" 
-            />
-            <input 
-              type="text"
-              name="speler4" 
-              placeholder="Speler 4 *" 
-              required 
-              minlength="2"
-              class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" 
-            />
-            <input 
-              type="text"
-              name="speler5" 
-              placeholder="Speler 5 *" 
-              required 
-              minlength="2"
-              class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" 
-            />
-            <input 
-              type="text"
-              name="speler6" 
-              placeholder="Speler 6 *" 
-              required 
-              minlength="2"
-              class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" 
-            />
-            <!-- Speler 7-10 (optioneel) -->
-            <input 
-              type="text"
-              name="speler7" 
-              placeholder="Speler 7 (optioneel)" 
-              minlength="2"
-              class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" 
-            />
-            <input 
-              type="text"
-              name="speler8" 
-              placeholder="Speler 8 (optioneel)" 
-              minlength="2"
-              class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" 
-            />
-            <input 
-              type="text"
-              name="speler9" 
-              placeholder="Speler 9 (optioneel)" 
-              minlength="2"
-              class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" 
-            />
-            <input 
-              type="text"
-              name="speler10" 
-              placeholder="Speler 10 (optioneel)" 
-              minlength="2"
-              class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" 
-            />
-          </div>
-        </div>
-        
-        <!-- Opmerkingen (optioneel) -->
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1.5 sm:mb-2">
-            Opmerkingen (optioneel)
-          </label>
-          <textarea 
-            name="opmerkingen" 
-            placeholder="Eventuele opmerkingen..." 
-            rows="3"
-            class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-y" 
-          ></textarea>
-        </div>
-        
-        <!-- Voorwaarden -->
-        <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 sm:p-4">
-          <p class="text-xs sm:text-sm text-amber-800 break-words">
-            Met het versturen van het formulier gaat iedereen akkoord met de <a href="/voorwaarden" class="underline hover:text-amber-900 font-semibold" target="_blank" rel="noopener noreferrer">algemene voorwaarden</a> en <a href="/spelregels" class="underline hover:text-amber-900 font-semibold" target="_blank" rel="noopener noreferrer">spelregels</a> zoals vernoemd op de website.
-          </p>
-        </div>
-        
-        <!-- Honeypot -->
-        <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
-        
-        <!-- Cloudflare Turnstile -->
-        <div id="modal-turnstile-container-team" class="flex justify-center"></div>
-        
-        <!-- Error message container -->
-        <div id="modal-form-error-team" class="hidden bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4 text-red-800 text-sm"></div>
-        
-        <!-- Submit button -->
-        <button 
-          type="submit" 
-          id="modal-submit-btn-team"
-          class="w-full px-6 sm:px-8 py-3 sm:py-4 bg-primary-600 text-white rounded-xl font-semibold text-sm sm:text-base md:text-lg hover:bg-primary-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          🚀 Versturen
-        </button>
-      </form>
+          
+          <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
+          <div id="modal-turnstile-container-team" class="flex justify-center min-h-[65px]"></div>
+          <div id="modal-form-error-team" class="hidden bg-red-50 border border-red-200 rounded-2xl p-5 text-red-800 text-sm font-sans font-medium animate-fade-in"></div>
+          
+          <button 
+            type="submit" 
+            id="modal-submit-btn-team"
+            class="btn-primary w-full !rounded-2xl group"
+          >
+            <span class="group-hover:translate-x-1 transition-transform flex items-center justify-center">
+              Team inschrijven
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </button>
+        </form>
 
-      <!-- Instuif Inschrijfformulier -->
-      <form 
-        method="post" 
-        action="/api/submit" 
-        id="inschrijf-form-instuif"
-        class="grid gap-4 sm:gap-5 md:gap-6 bg-white p-4 sm:p-6 md:p-8 rounded-3xl shadow-2xl border border-slate-200 hidden"
-      >
-        <input type="hidden" name="formId" value="instuif" />
-        
-        <!-- Voornaam -->
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1.5 sm:mb-2">
-            Voornaam *
-          </label>
-          <input 
-            name="voornaam" 
-            placeholder="Voornaam" 
-            required 
-            minlength="2"
-            class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" 
-          />
-        </div>
-        
-        <!-- Achternaam -->
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1.5 sm:mb-2">
-            Achternaam *
-          </label>
-          <input 
-            name="achternaam" 
-            placeholder="Achternaam" 
-            required 
-            minlength="2"
-            class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" 
-          />
-        </div>
-        
-        <!-- E-mail -->
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1.5 sm:mb-2">
-            E-mailadres *
-          </label>
-          <p class="text-xs sm:text-sm text-slate-500 mb-2 sm:mb-3 break-words">
-            Via dit e-mailadres versturen wij de bevestiging en informatie.
-          </p>
-          <input 
-            name="email" 
-            type="email" 
-            placeholder="E-mailadres" 
-            required 
-            class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" 
-          />
-        </div>
-        
-        <!-- Leeftijdsgroep -->
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-3 sm:mb-4">
-            Leeftijdsgroep *
-          </label>
-          <div class="space-y-2 sm:space-y-3">
-            <label class="flex items-start p-3 sm:p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
-              <input 
-                type="radio" 
-                name="leeftijdsgroep" 
-                value="4-5" 
-                required 
-                class="mr-3 mt-1 text-primary-600 focus:ring-primary-500 flex-shrink-0" 
-              />
-              <span class="text-sm sm:text-base text-slate-700 break-words">Groep 4-5</span>
-            </label>
-            <label class="flex items-start p-3 sm:p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
-              <input 
-                type="radio" 
-                name="leeftijdsgroep" 
-                value="6" 
-                required 
-                class="mr-3 mt-1 text-primary-600 focus:ring-primary-500 flex-shrink-0" 
-              />
-              <span class="text-sm sm:text-base text-slate-700 break-words">Groep 6</span>
-            </label>
-            <label class="flex items-start p-3 sm:p-4 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
-              <input 
-                type="radio" 
-                name="leeftijdsgroep" 
-                value="7-8" 
-                required 
-                class="mr-3 mt-1 text-primary-600 focus:ring-primary-500 flex-shrink-0" 
-              />
-              <span class="text-sm sm:text-base text-slate-700 break-words">Groep 7-8</span>
-            </label>
-          </div>
-        </div>
-        
-        <!-- Medische informatie (optioneel) -->
-        <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1.5 sm:mb-2">
-            Medische informatie (optioneel)
-          </label>
-          <p class="text-xs sm:text-sm text-slate-500 mb-2 sm:mb-3 break-words">
-            Geef hier eventuele medische informatie door die belangrijk is voor de begeleiding tijdens de instuif.
-          </p>
-          <textarea 
-            name="medisch" 
-            placeholder="Medische informatie..." 
-            rows="3"
-            class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-y" 
-          ></textarea>
-        </div>
-        
-        <!-- Voorwaarden -->
-        <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 sm:p-4">
-          <p class="text-xs sm:text-sm text-amber-800 break-words">
-            Met het versturen van het formulier gaat iedereen akkoord met de <a href="/voorwaarden" class="underline hover:text-amber-900 font-semibold" target="_blank" rel="noopener noreferrer">algemene voorwaarden</a> en <a href="/spelregels" class="underline hover:text-amber-900 font-semibold" target="_blank" rel="noopener noreferrer">spelregels</a> zoals vernoemd op de website.
-          </p>
-        </div>
-        
-        <!-- Honeypot -->
-        <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
-        
-        <!-- Cloudflare Turnstile -->
-        <div id="modal-turnstile-container-instuif" class="flex justify-center"></div>
-        
-        <!-- Error message container -->
-        <div id="modal-form-error-instuif" class="hidden bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4 text-red-800 text-sm"></div>
-        
-        <!-- Submit button -->
-        <button 
-          type="submit" 
-          id="modal-submit-btn-instuif"
-          class="w-full px-6 sm:px-8 py-3 sm:py-4 bg-primary-600 text-white rounded-xl font-semibold text-sm sm:text-base md:text-lg hover:bg-primary-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+        <!-- Instuif Inschrijfformulier (Verborgen voor nu, zelfde stijl als hierboven) -->
+        <form 
+          method="post" 
+          action="/api/submit" 
+          id="inschrijf-form-instuif"
+          class="space-y-10 hidden"
         >
-          🚀 Versturen
-        </button>
-      </form>
+          <input type="hidden" name="formId" value="instuif" />
+          
+          <div class="grid sm:grid-cols-2 gap-8">
+            <div>
+              <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">Voornaam *</label>
+              <input name="voornaam" placeholder="Voornaam" required minlength="2" class="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-primary-100 focus:border-primary-500 focus:bg-white transition-all outline-none font-sans font-medium" />
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">Achternaam *</label>
+              <input name="achternaam" placeholder="Achternaam" required minlength="2" class="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-primary-100 focus:border-primary-500 focus:bg-white transition-all outline-none font-sans font-medium" />
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">E-mailadres *</label>
+              <input name="email" type="email" placeholder="jouw@email.nl" required class="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-primary-100 focus:border-primary-500 focus:bg-white transition-all outline-none font-sans font-medium" />
+            </div>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-bold text-slate-700 mb-4 uppercase tracking-wider">Leeftijdsgroep *</label>
+            <div class="grid sm:grid-cols-3 gap-4">
+              {['4-5', '6', '7-8'].map(groep => (
+                <label class="flex items-center p-4 border-2 border-slate-100 rounded-2xl hover:bg-primary-50 cursor-pointer transition-all has-[:checked]:border-primary-500 has-[:checked]:bg-primary-50">
+                  <input type="radio" name="leeftijdsgroep" value={groep} required class="w-5 h-5 text-primary-600 focus:ring-primary-500" />
+                  <span class="ml-3 font-bold text-slate-900">Groep {groep}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">Medische informatie</label>
+            <textarea name="medisch" placeholder="Eventuele allergieën of bijzonderheden..." rows="3" class="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-primary-100 focus:border-primary-500 focus:bg-white transition-all outline-none resize-none font-sans font-medium"></textarea>
+          </div>
+
+          <div class="bg-amber-50 border border-amber-100 rounded-2xl p-6">
+            <p class="text-sm text-amber-900 font-sans font-medium">Door te versturen ga je akkoord met de voorwaarden en spelregels.</p>
+          </div>
+          
+          <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
+          <div id="modal-turnstile-container-instuif" class="flex justify-center min-h-[65px]"></div>
+          <div id="modal-form-error-instuif" class="hidden bg-red-50 border border-red-200 rounded-2xl p-5 text-red-800 text-sm animate-fade-in"></div>
+          
+          <button type="submit" id="modal-submit-btn-instuif" class="btn-primary w-full !rounded-2xl group">
+             <span class="group-hover:translate-x-1 transition-transform flex items-center justify-center">
+              Inschrijving afronden
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12h14m-7-7 7 7-7 7"/></svg>
+            </span>
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
@@ -434,490 +284,174 @@
     const backdrop = document.getElementById('modal-backdrop');
     const closeBtn = document.getElementById('modal-close-btn');
     const modalContent = document.getElementById('modal-content');
-    const infoTeam = document.getElementById('info-team');
-    const infoInstuif = document.getElementById('info-instuif');
     const formTeam = document.getElementById('inschrijf-form-team');
     const formInstuif = document.getElementById('inschrijf-form-instuif');
     const containerTeam = document.getElementById('modal-turnstile-container-team');
     const containerInstuif = document.getElementById('modal-turnstile-container-instuif');
     
-    let currentFormType = 'team'; // 'team' of 'instuif'
+    let currentFormType = 'team';
     let widgetLoadedTeam = false;
     let widgetLoadedInstuif = false;
     let widgetIdTeam = null;
     let widgetIdInstuif = null;
     
-    // Functie om required attributen te beheren
     function toggleRequiredAttributes(form, enable) {
       if (!form) return;
       const requiredFields = form.querySelectorAll('[required]');
       requiredFields.forEach(field => {
-        if (enable) {
-          field.setAttribute('required', '');
-        } else {
-          field.removeAttribute('required');
-        }
+        if (enable) field.setAttribute('required', '');
+        else field.removeAttribute('required');
       });
     }
     
-    // Functie om formulier type in te stellen (alleen programmatisch)
     function setFormType(type) {
       if (type === currentFormType) return;
-      
       currentFormType = type;
       
-      // Show/hide info blocks
       if (type === 'team') {
-        infoTeam.classList.remove('hidden');
-        infoInstuif.classList.add('hidden');
-        
-        // Show/hide forms en toggle required attributen
-        formTeam.classList.remove('hidden');
+        formTeam?.classList.remove('hidden');
         toggleRequiredAttributes(formTeam, true);
-        formInstuif.classList.add('hidden');
+        formInstuif?.classList.add('hidden');
         toggleRequiredAttributes(formInstuif, false);
-        
-        // Reset and reload Turnstile for team form
         resetTurnstile('instuif');
-        if (!widgetLoadedTeam && containerTeam) {
-          loadTurnstile('team');
-        }
+        if (!widgetLoadedTeam && containerTeam) loadTurnstile('team');
       } else {
-        infoInstuif.classList.remove('hidden');
-        infoTeam.classList.add('hidden');
-        
-        // Show/hide forms en toggle required attributen
-        formInstuif.classList.remove('hidden');
+        formInstuif?.classList.remove('hidden');
         toggleRequiredAttributes(formInstuif, true);
-        formTeam.classList.add('hidden');
+        formTeam?.classList.add('hidden');
         toggleRequiredAttributes(formTeam, false);
-        
-        // Reset and reload Turnstile for instuif form
         resetTurnstile('team');
-        if (!widgetLoadedInstuif && containerInstuif) {
-          loadTurnstile('instuif');
-        }
-      }
-      
-      // Focus op eerste input
-      const activeForm = type === 'team' ? formTeam : formInstuif;
-      const firstInput = activeForm?.querySelector('input, textarea, select');
-      if (firstInput) {
-        setTimeout(() => firstInput.focus(), 100);
+        if (!widgetLoadedInstuif && containerInstuif) loadTurnstile('instuif');
       }
     }
     
-    // Functie om modal te openen
     function openModal(formType = 'team') {
-      if (!modal) return;
-      
-      // Set form type (alleen programmatisch instelbaar)
-      // Dit zorgt ervoor dat required attributen correct worden ingesteld
+      if (!modal || !backdrop || !modalContent) return;
       setFormType(formType);
       
       modal.classList.remove('hidden');
       modal.classList.add('flex');
       document.body.style.overflow = 'hidden';
       
-      // Trigger reflow voor animatie
-      void modal.offsetWidth;
-      
-      // Animate in
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         backdrop.classList.remove('opacity-0');
         backdrop.classList.add('opacity-100');
-        modalContent.classList.remove('scale-95', 'opacity-0');
+        modalContent.classList.remove('scale-90', 'opacity-0');
         modalContent.classList.add('scale-100', 'opacity-100');
-      }, 10);
+      });
       
-      // Focus op eerste input
-      const activeForm = formType === 'team' ? formTeam : formInstuif;
-      const firstInput = activeForm?.querySelector('input, textarea, select');
-      if (firstInput) {
-        setTimeout(() => firstInput.focus(), 100);
-      }
-      
-      // Laad Turnstile widget wanneer modal opent
-      const container = formType === 'team' ? containerTeam : containerInstuif;
-      const widgetLoaded = formType === 'team' ? widgetLoadedTeam : widgetLoadedInstuif;
-      if (activeForm && container && !widgetLoaded) {
-        loadTurnstile(formType);
-      }
+      if (!widgetLoadedTeam && formType === 'team') loadTurnstile('team');
+      if (!widgetLoadedInstuif && formType === 'instuif') loadTurnstile('instuif');
     }
     
-    // Functie om modal te sluiten
     function closeModal() {
-      if (!modal) return;
+      if (!modal || !backdrop || !modalContent) return;
       
-      // Animate out
       backdrop.classList.remove('opacity-100');
       backdrop.classList.add('opacity-0');
       modalContent.classList.remove('scale-100', 'opacity-100');
-      modalContent.classList.add('scale-95', 'opacity-0');
+      modalContent.classList.add('scale-90', 'opacity-0');
       
       setTimeout(() => {
         modal.classList.add('hidden');
         modal.classList.remove('flex');
         document.body.style.overflow = '';
-        
-        // Reset formulieren
-        if (formTeam) {
-          formTeam.reset();
-          const errorDiv = document.getElementById('modal-form-error-team');
-          errorDiv?.classList.add('hidden');
-          errorDiv && (errorDiv.textContent = '');
-        }
-        if (formInstuif) {
-          formInstuif.reset();
-          const errorDiv = document.getElementById('modal-form-error-instuif');
-          errorDiv?.classList.add('hidden');
-          errorDiv && (errorDiv.textContent = '');
-        }
-        
-        // Reset Turnstile widgets
+        (formTeam as HTMLFormElement)?.reset();
+        (formInstuif as HTMLFormElement)?.reset();
         resetTurnstile('team');
         resetTurnstile('instuif');
-      }, 300);
+      }, 500);
     }
     
-    // Reset Turnstile widget
     function resetTurnstile(type) {
       const widgetId = type === 'team' ? widgetIdTeam : widgetIdInstuif;
       const container = type === 'team' ? containerTeam : containerInstuif;
-      
-      if (widgetId !== null && typeof window.turnstile !== 'undefined') {
-        try {
-          window.turnstile.remove(widgetId);
-        } catch (e) {
-          // Ignore errors
-        }
+      if (widgetId !== null && (window as any).turnstile) {
+        try { (window as any).turnstile.remove(widgetId); } catch(e){}
       }
-      
-      if (type === 'team') {
-        widgetIdTeam = null;
-        widgetLoadedTeam = false;
-      } else {
-        widgetIdInstuif = null;
-        widgetLoadedInstuif = false;
-      }
-      
-      if (container) {
-        container.innerHTML = '';
-      }
+      if (type === 'team') { widgetIdTeam = null; widgetLoadedTeam = false; }
+      else { widgetIdInstuif = null; widgetLoadedInstuif = false; }
+      if (container) container.innerHTML = '';
     }
     
-    // Laad Turnstile widget
     async function loadTurnstile(type) {
-      const form = type === 'team' ? formTeam : formInstuif;
       const container = type === 'team' ? containerTeam : containerInstuif;
-      const widgetLoaded = type === 'team' ? widgetLoadedTeam : widgetLoadedInstuif;
-      
-      if (!form || !container || widgetLoaded) return;
+      if (!container || (type === 'team' ? widgetLoadedTeam : widgetLoadedInstuif)) return;
       
       try {
-        console.log('[Turnstile] Ophalen site key via API...');
         const response = await fetch('/api/turnstile-key');
-        
-        if (!response.ok) {
-          throw new Error(`API response niet OK: ${response.status}`);
-        }
-        
         const data = await response.json();
-        console.log('[Turnstile] Site key ontvangen:', data.siteKey ? data.siteKey.substring(0, 20) + '...' : 'GEEN SITE KEY');
         
-        if (data.siteKey && data.siteKey.length > 0) {
-          // Wacht tot Turnstile script geladen is
-          if (typeof window.turnstile === 'undefined') {
-            console.log('[Turnstile] Wachten op Turnstile script...');
-            await new Promise((resolve) => {
-              if (typeof window.turnstile !== 'undefined') {
-                console.log('[Turnstile] Script al geladen');
-                resolve();
-                return;
-              }
-              let attempts = 0;
-              const checkInterval = setInterval(() => {
-                attempts++;
-                if (typeof window.turnstile !== 'undefined') {
-                  console.log('[Turnstile] Script geladen na', attempts * 100, 'ms');
-                  clearInterval(checkInterval);
-                  resolve();
-                } else if (attempts >= 30) {
-                  console.error('[Turnstile] Script niet geladen na 3 seconden');
-                  clearInterval(checkInterval);
-                  resolve();
-                }
+        if (data.siteKey) {
+          if (typeof (window as any).turnstile === 'undefined') {
+            await new Promise(r => {
+              let i = setInterval(() => {
+                if (typeof (window as any).turnstile !== 'undefined') { clearInterval(i); r(null); }
               }, 100);
             });
           }
           
-          // Render Turnstile widget
-          if (typeof window.turnstile !== 'undefined' && !widgetLoaded && container.children.length === 0) {
-            console.log('[Turnstile] Renderen widget voor', type);
-            
+          if ((window as any).turnstile && container.children.length === 0) {
             const widgetDiv = document.createElement('div');
-            widgetDiv.id = `modal-turnstile-widget-${type}`;
             container.appendChild(widgetDiv);
-            
-            try {
-              const widgetId = window.turnstile.render(widgetDiv, {
-                sitekey: data.siteKey,
-                theme: 'light',
-                callback: function(token) {
-                  console.log('[Turnstile] Token gegenereerd voor', type);
-                },
-                'error-callback': function(error) {
-                  console.error('[Turnstile] Error callback:', error);
-                  if (error === '110200' || error === 110200) {
-                    const currentHost = window.location.host;
-                    container.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-lg p-3 text-red-800 text-sm"><p class="font-semibold mb-2">⚠️ Domein niet toegestaan</p><p class="mb-2">Het domein <code class="bg-red-100 px-1 rounded">' + currentHost + '</code> is niet toegevoegd aan de toegestane domeinen in Turnstile.</p><p class="text-xs">Voeg toe in Cloudflare Dashboard: Security → Turnstile → Je site → Domains</p><p class="text-xs mt-1">Domeinen om toe te voegen: <code class="bg-red-100 px-1 rounded">localhost</code>, <code class="bg-red-100 px-1 rounded">127.0.0.1</code>, <code class="bg-red-100 px-1 rounded">localhost:4321</code></p></div>';
-                  }
-                },
-                'expired-callback': function() {
-                  console.log('[Turnstile] Token verlopen - wordt automatisch vernieuwd');
-                  if (typeof window.turnstile !== 'undefined') {
-                    try {
-                      window.turnstile.reset(widgetId);
-                    } catch (e) {
-                      console.error('[Turnstile] Fout bij resetten:', e);
-                    }
-                  }
-                }
-              });
-              
-              if (type === 'team') {
-                widgetIdTeam = widgetId;
-                widgetLoadedTeam = true;
-              } else {
-                widgetIdInstuif = widgetId;
-                widgetLoadedInstuif = true;
-              }
-              
-              console.log('[Turnstile] Widget gerenderd met ID:', widgetId);
-            } catch (renderError) {
-              console.error('[Turnstile] Fout bij renderen:', renderError);
-              container.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-lg p-3 text-red-800 text-sm text-center">⚠️ Fout bij renderen van captcha: ' + renderError.message + '</div>';
-            }
+            const wId = (window as any).turnstile.render(widgetDiv, {
+              sitekey: data.siteKey,
+              theme: 'light',
+              callback: () => {}
+            });
+            if (type === 'team') { widgetIdTeam = wId; widgetLoadedTeam = true; }
+            else { widgetIdInstuif = wId; widgetLoadedInstuif = true; }
           }
-        } else {
-          console.error('[Turnstile] Geen site key ontvangen');
-          container.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-lg p-3 text-red-800 text-sm text-center">⚠️ Captcha niet beschikbaar: PUBLIC_TURNSTILE_SITE_KEY niet ingesteld. Controleer je .env bestand.</div>';
         }
-      } catch (err) {
-        console.error('[Turnstile] Fout bij laden:', err);
-        container.innerHTML = '<div class="bg-red-50 border border-red-200 rounded-lg p-3 text-red-800 text-sm text-center">⚠️ Fout bij laden van captcha: ' + (err instanceof Error ? err.message : String(err)) + '</div>';
-      }
+      } catch (e) {}
     }
     
-    // Event listeners
-    if (closeBtn) {
-      closeBtn.addEventListener('click', closeModal);
-    }
+    closeBtn?.addEventListener('click', closeModal);
+    backdrop?.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
     
-    if (backdrop) {
-      backdrop.addEventListener('click', closeModal);
-    }
-    
-    // ESC-toets om modal te sluiten
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
-        closeModal();
-      }
-    });
-    
-    // Formulier submit handlers
-    function setupFormSubmit(form, formType) {
+    function setupForm(form, type) {
       if (!form) return;
-      
-      const errorDiv = document.getElementById(`modal-form-error-${formType}`);
-      const submitBtn = document.getElementById(`modal-submit-btn-${formType}`);
-      const widgetId = formType === 'team' ? widgetIdTeam : widgetIdInstuif;
+      const errorDiv = document.getElementById(`modal-form-error-${type}`);
+      const submitBtn = document.getElementById(`modal-submit-btn-${type}`);
       
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        if (errorDiv) { errorDiv.classList.add('hidden'); errorDiv.textContent = ''; }
         
-        // Verberg vorige errors
-        if (errorDiv) {
-          errorDiv.classList.add('hidden');
-          errorDiv.textContent = '';
+        const token = (form.querySelector('input[name="cf-turnstile-response"]') as HTMLInputElement)?.value;
+        if (!token) {
+          if (errorDiv) { errorDiv.textContent = 'Captcha verplicht.'; errorDiv.classList.remove('hidden'); }
+          return;
         }
         
-        // Check of Turnstile token aanwezig is
-        const turnstileInput = form.querySelector('input[name="cf-turnstile-response"]');
-        const turnstileWidget = form.querySelector('.cf-turnstile');
-        let turnstileToken = turnstileInput ? turnstileInput.value : null;
-        
-        if (!turnstileToken) {
-          await new Promise(resolve => setTimeout(resolve, 500));
-          const retryInput = form.querySelector('input[name="cf-turnstile-response"]');
-          turnstileToken = retryInput ? retryInput.value : null;
-          
-          if (!turnstileToken && widgetId !== null && typeof window.turnstile !== 'undefined') {
-            try {
-              console.log('[Turnstile] Resetten widget om nieuwe token te genereren...');
-              window.turnstile.reset(widgetId);
-              await new Promise(resolve => setTimeout(resolve, 1000));
-              const resetInput = form.querySelector('input[name="cf-turnstile-response"]');
-              turnstileToken = resetInput ? resetInput.value : null;
-            } catch (e) {
-              console.error('[Turnstile] Fout bij resetten:', e);
-            }
-          }
-          
-          if (!turnstileToken) {
-            if (errorDiv) {
-              errorDiv.textContent = 'Captcha is nog niet geladen of token is verlopen. Wacht even en probeer het opnieuw.';
-              errorDiv.classList.remove('hidden');
-              errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
-            return;
-          }
-        }
-        
-        // Disable submit button
         if (submitBtn) {
           submitBtn.disabled = true;
-          const originalText = submitBtn.textContent;
-          submitBtn.textContent = 'Verzenden...';
+          const oldText = submitBtn.innerHTML;
+          submitBtn.innerHTML = 'Verzenden...';
           
           try {
-            const formData = new FormData(form);
-            const response = await fetch('/api/submit', {
-              method: 'POST',
-              body: formData
-            });
-            
-            // Handle redirect (303)
-            if (response.status === 303) {
-              const location = response.headers.get('Location');
-              closeModal();
-              window.location.href = location || '/bedankt';
-              return;
+            const res = await fetch('/api/submit', { method: 'POST', body: new FormData(form) });
+            if (res.ok) { closeModal(); window.location.href = '/bedankt'; }
+            else {
+              const err = await res.json();
+              if (errorDiv) { errorDiv.textContent = err.error || 'Fout bij verzenden.'; errorDiv.classList.remove('hidden'); }
             }
-            
-            // Handle success (200-299)
-            if (response.ok) {
-              closeModal();
-              window.location.href = '/bedankt';
-              return;
-            }
-            
-            // Parse error response
-            let errorMessage = 'Er is een fout opgetreden. Probeer het opnieuw.';
-            try {
-              const errorData = await response.json();
-              errorMessage = errorData.error || errorMessage;
-              
-              if (errorData.details && errorData.details.fieldErrors) {
-                const fieldErrors: string[] = [];
-                const fieldNames: Record<string, string> = {
-                  'tel': 'Telefoonnummer',
-                  'deelnemers': 'Teamspelers',
-                  'teamnaam': 'Teamnaam',
-                  'contactNaam': 'Contactpersoon',
-                  'email': 'E-mailadres',
-                  'leeftijdsgroep': 'Leeftijdsgroep',
-                  'voornaam': 'Voornaam',
-                  'achternaam': 'Achternaam'
-                };
-                
-                Object.entries(errorData.details.fieldErrors).forEach(([field, errors]) => {
-                  if (Array.isArray(errors) && errors.length > 0) {
-                    const fieldName = fieldNames[field] || field;
-                    const errorText = errors.map(err => {
-                      if (err.includes('Too small') && err.includes('>=6')) {
-                        if (field === 'tel') {
-                          return 'moet minimaal 6 cijfers bevatten';
-                        } else if (field === 'deelnemers') {
-                          return 'minimaal 6 teamspelers nodig';
-                        }
-                      }
-                      if (err.includes('Too small') && err.includes('>=2')) {
-                        return 'moet minimaal 2 karakters bevatten';
-                      }
-                      if (err.includes('Too big') && err.includes('<=10')) {
-                        if (field === 'deelnemers') {
-                          return 'maximaal 10 teamspelers toegestaan';
-                        }
-                      }
-                      if (err.includes('Invalid email')) {
-                        return 'is geen geldig e-mailadres';
-                      }
-                      // Vertaal andere veelvoorkomende foutmeldingen
-                      if (err.includes('Required')) {
-                        return 'is verplicht';
-                      }
-                      if (err.includes('Expected')) {
-                        return 'heeft een ongeldige waarde';
-                      }
-                      return err;
-                    }).join(', ');
-                    fieldErrors.push(`• ${fieldName}: ${errorText}`);
-                  }
-                });
-                
-                if (fieldErrors.length > 0) {
-                  errorMessage = 'Controleer de volgende velden:\n\n' + fieldErrors.join('\n');
-                }
-              }
-              
-              console.error('[Formulier] Error response ontvangen');
-            } catch {
-              // Vertaal HTTP status codes naar Nederlands
-              let statusText = response.statusText;
-              if (response.status === 400) {
-                statusText = 'Ongeldig verzoek';
-              } else if (response.status === 401) {
-                statusText = 'Niet geautoriseerd';
-              } else if (response.status === 403) {
-                statusText = 'Toegang geweigerd';
-              } else if (response.status === 404) {
-                statusText = 'Niet gevonden';
-              } else if (response.status === 429) {
-                statusText = 'Te veel verzoeken';
-              } else if (response.status === 500) {
-                statusText = 'Serverfout';
-              } else if (response.status === 503) {
-                statusText = 'Service niet beschikbaar';
-              }
-              errorMessage = `Fout: ${response.status} ${statusText}`;
-            }
-            
-            // Toon error
-            if (errorDiv) {
-              errorDiv.textContent = errorMessage;
-              errorDiv.classList.remove('hidden');
-              errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
-            
-          } catch (err) {
-            if (errorDiv) {
-              errorDiv.textContent = 'Er is een netwerkfout opgetreden. Controleer je internetverbinding en probeer het opnieuw.';
-              errorDiv.classList.remove('hidden');
-              errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
+          } catch(e) {
+            if (errorDiv) { errorDiv.textContent = 'Netwerkfout.'; errorDiv.classList.remove('hidden'); }
           } finally {
-            // Re-enable submit button
-            if (submitBtn) {
-              submitBtn.disabled = false;
-              submitBtn.textContent = originalText;
-            }
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = oldText; }
           }
         }
       });
     }
     
-    setupFormSubmit(formTeam, 'team');
-    setupFormSubmit(formInstuif, 'instuif');
-    
-    // Expose openModal function globally
-    window.openInschrijfModal = openModal;
+    setupForm(formTeam, 'team');
+    setupForm(formInstuif, 'instuif');
+    (window as any).openInschrijfModal = openModal;
   })();
 </script>
 
 <style>
-  /* Zorg dat modal boven alles komt */
-  #inschrijf-modal {
-    z-index: 9999;
-  }
+  #inschrijf-modal { z-index: 9999; }
 </style>
