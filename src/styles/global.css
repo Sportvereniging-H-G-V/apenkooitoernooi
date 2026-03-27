@@ -100,8 +100,10 @@ header img[alt="Apenkooi Toernooi"] {
   }
 
   h1, h2, h3 {
-    font-family: var(--font-hotMustard);
-    letter-spacing: 0.02em;
+    font-family: var(--font-condensed);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
   }
 }
 
@@ -109,7 +111,9 @@ header img[alt="Apenkooi Toernooi"] {
   .hero-heading {
     font-size: clamp(2.5rem, 8vw, 5.5rem);
     line-height: 1;
-    font-family: var(--font-hotMustard);
+    font-family: var(--font-condensed);
+    font-weight: 800;
+    text-transform: uppercase;
   }
 
   .glass-card {
@@ -130,10 +134,6 @@ header img[alt="Apenkooi Toernooi"] {
 }
 
 @layer utilities {
-  .font-hotMustard {
-    font-family: var(--font-hotMustard);
-  }
-
   .bg-grid-pattern {
     background-image: radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px);
     background-size: 24px 24px;

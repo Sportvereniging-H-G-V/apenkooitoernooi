@@ -51,11 +51,11 @@ const faq = await import('../../content/faq.json');
             {section.faqs.map((faqItem, faqIndex) => (
               <div class="glass-card rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 group animate-fade-in border-slate-100" style={`animation-delay: ${faqIndex * 100}ms`}>
                 <h3 class="text-xl sm:text-2xl text-slate-900 mb-4 flex items-start group-hover:text-primary-600 transition-colors">
-                  <span class="text-primary-600 mr-4 font-bold font-hotMustard text-2xl group-hover:scale-125 transition-transform group-hover:rotate-12">Q.</span>
+                  <span class="text-primary-600 mr-4 font-bold font-condensed text-2xl group-hover:scale-125 transition-transform group-hover:rotate-12">Q.</span>
                   <span class="font-bold">{faqItem.q}</span>
                 </h3>
                 <div class="flex items-start">
-                  <span class="text-slate-300 mr-4 font-bold font-hotMustard text-2xl">A.</span>
+                  <span class="text-slate-300 mr-4 font-bold font-condensed text-2xl">A.</span>
                   <p class="text-slate-600 leading-relaxed text-lg font-sans font-medium">{faqItem.a}</p>
                 </div>
               </div>
@@ -70,7 +70,7 @@ const faq = await import('../../content/faq.json');
   <section class="section-spacing bg-slate-900 text-white relative overflow-hidden">
     <div class="absolute inset-0 bg-dot-pattern opacity-10"></div>
     <div class="max-w-4xl mx-auto px-6 text-center relative">
-      <h2 class="text-3xl sm:text-4xl md:text-5xl mb-6 font-hotMustard">Nog vragen?</h2>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl mb-6 font-condensed font-bold uppercase">Nog vragen?</h2>
       <p class="text-lg sm:text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
         Staat jouw vraag er niet bij? Neem gerust contact met ons op via het contactformulier.
       </p>

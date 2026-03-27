@@ -12,7 +12,7 @@ const contactData = await import('../../content/contact.json');
       <div class="lg:col-span-1">
         <div class="flex items-center gap-3 mb-6 group">
           <img src="/images/logo/logo.avif" alt="Logo" class="w-10 h-10 group-hover:rotate-12 transition-transform" />
-          <span class="text-2xl font-hotMustard text-primary-500">Apenkooi<br/>Toernooi</span>
+          <span class="text-2xl text-primary-500 leading-tight" style="font-family: 'HotMustardBTNPoster', cursive;">Apenkooi<br/>Toernooi</span>
         </div>
         <p class="text-slate-400 text-sm leading-relaxed mb-6">
           Hét leukste sportevenement voor basisschoolleerlingen. Plezier, actie en sportiviteit staan bij ons centraal!
@@ -21,7 +21,7 @@ const contactData = await import('../../content/contact.json');
 
       <!-- Kolom 1: Contact informatie -->
       <div>
-        <h3 class="text-lg font-hotMustard text-white mb-6 tracking-wide">Contact</h3>
+        <h3 class="text-xl font-condensed font-bold text-white mb-6 tracking-wide uppercase">Contact</h3>
         <ul class="space-y-4 text-slate-400">
           <li class="flex items-center gap-3 group">
             <span class="bg-slate-800 p-2 rounded-lg group-hover:bg-primary-600 group-hover:text-white transition-colors">
@@ -40,7 +40,7 @@ const contactData = await import('../../content/contact.json');
       
       <!-- Kolom 2: Navigatie -->
       <div>
-        <h3 class="text-lg font-hotMustard text-white mb-6 tracking-wide">Navigatie</h3>
+        <h3 class="text-xl font-condensed font-bold text-white mb-6 tracking-wide uppercase">Navigatie</h3>
         <ul class="space-y-3 text-slate-400">
           <li><a href="/" class="hover:text-primary-500 transition-all hover:translate-x-1 inline-block">Home</a></li>
           <li><a href="/spelregels" class="hover:text-primary-500 transition-all hover:translate-x-1 inline-block">Spelregels</a></li>
@@ -52,7 +52,7 @@ const contactData = await import('../../content/contact.json');
       
       <!-- Kolom 3: Social media -->
       <div>
-        <h3 class="text-lg font-hotMustard text-white mb-6 tracking-wide">Social media</h3>
+        <h3 class="text-xl font-condensed font-bold text-white mb-6 tracking-wide uppercase">Social media</h3>
         <ul class="space-y-4">
           {contactData.default.contact.social?.facebook && contactData.default.contact.social.facebook.map((fb, idx) => (
             <li>

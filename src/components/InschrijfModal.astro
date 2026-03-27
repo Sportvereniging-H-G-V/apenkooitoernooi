@@ -53,7 +53,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
             </div>
             <div>
-              <h3 class="text-xl sm:text-2xl font-hotMustard mb-2 tracking-wide">Belangrijke informatie</h3>
+              <h3 class="text-xl sm:text-2xl font-condensed font-bold mb-2 tracking-wide uppercase">Belangrijke informatie</h3>
               <p class="text-base sm:text-lg text-white/90 leading-relaxed font-sans font-medium">
                 Reserveer alvast <span class="font-bold text-white underline decoration-white/30 underline-offset-4">woensdag 25 februari 2026</span> voor de Apenkooi Toernooi 2026 in uw agenda. 
                 Hiervoor kan je vanaf 1 november opgeven via dit formulier.
@@ -166,7 +166,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {Array.from({ length: 10 }).map((_, i) => (
                 <div class="relative group">
-                  <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 font-bold font-hotMustard group-focus-within:text-primary-400 transition-colors">{i + 1}</span>
+                  <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 font-bold font-condensed group-focus-within:text-primary-400 transition-colors">{i + 1}</span>
                   <input 
                     type="text"
                     name={`speler${i + 1}`} 
