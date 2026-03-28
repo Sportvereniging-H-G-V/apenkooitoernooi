@@ -1,10 +1,8 @@
-import type { APIContext } from 'astro';
-
 /**
  * API endpoint om Turnstile site key runtime op te halen
  * Leest de key uit Cloudflare Workers runtime env (wrangler.toml [vars])
  */
-export async function GET(_context: APIContext) {
+export async function GET() {
   let runtimeSiteKey = '';
   try {
     const { env } = await import('cloudflare:workers');

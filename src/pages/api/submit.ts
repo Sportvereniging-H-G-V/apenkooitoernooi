@@ -5,7 +5,7 @@ import { appendJsonl, type CloudflareEnv } from '../../lib/log';
 import { verifyCaptcha } from '../../lib/captcha';
 import { sendMail } from '../../lib/email';
 
-export async function POST({ request, redirect, locals }: APIContext) {
+export async function POST({ request, redirect }: APIContext) {
   // Prefer Cloudflare's trusted cf-connecting-ip header over the spoofable x-forwarded-for
   const ip = request.headers.get('cf-connecting-ip') ||
              request.headers.get('x-forwarded-for')?.split(',')[0] ||
