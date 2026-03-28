@@ -77,9 +77,9 @@ export async function POST({ request, redirect }: APIContext) {
     let leeftijdsgroep: '4-5' | '6' | '7-8' = '6'; // default
     if (payload.aanmelding_type) {
       const aanmeldingType = payload.aanmelding_type.toLowerCase();
-      if (aanmeldingType.includes('groep 4, 5 en 6') || aanmeldingType.includes('groep 4,5 en 6')) {
+      if (aanmeldingType.includes('groep 4, 5 en 6') || aanmeldingType.includes('groep 4,5 en 6') || aanmeldingType.includes('groep 4, 5, 6') || aanmeldingType.includes('categorie 1')) {
         leeftijdsgroep = '4-5';
-      } else if (aanmeldingType.includes('groep 6, 7 en 8') || aanmeldingType.includes('groep 6,7 en 8')) {
+      } else if (aanmeldingType.includes('groep 6, 7 en 8') || aanmeldingType.includes('groep 6,7 en 8') || aanmeldingType.includes('groep 6, 7, 8') || aanmeldingType.includes('categorie 2')) {
         // Groep 6, 7 en 8 - gebruik '7-8' als default, of '6' als alleen groep 6
         leeftijdsgroep = '7-8';
       }
