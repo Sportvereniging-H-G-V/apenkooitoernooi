@@ -54,8 +54,7 @@ img, video, iframe {
 
 /* Prevent gray bars under images */
 img[class*="object-cover"],
-img[class*="h-full"],
-img[class*="h-"] {
+img[class*="h-full"] {
   display: block;
 }
 
