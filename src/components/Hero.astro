@@ -79,7 +79,7 @@ if (backgroundImage) {
     {ctas && ctas.length > 0 && (
       <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4 animate-fade-in" style="animation-delay: 400ms;">
         {ctas.map((cta, index) => {
-          const isInschrijvenButton = cta.href === '/#inschrijven' || cta.href === '#inschrijven' || index === 0;
+          const isInschrijvenButton = cta.href === '/#inschrijven' || cta.href === '#inschrijven';
           return (
             <a 
               href={cta.href}
