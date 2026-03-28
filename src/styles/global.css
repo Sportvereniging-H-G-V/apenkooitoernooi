@@ -47,9 +47,11 @@ html, body {
 }
 
 /* Ensure images and media don't overflow */
-img, video, iframe {
-  max-width: 100%;
-  height: auto;
+@layer base {
+  img, video, iframe {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 /* Prevent gray bars under images */
