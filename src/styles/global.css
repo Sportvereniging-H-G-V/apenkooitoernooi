@@ -40,8 +40,7 @@ img, video, iframe {
 
 /* Prevent gray bars under images - ensure images fill their containers properly */
 img[class*="object-cover"],
-img[class*="h-full"],
-img[class*="h-"] {
+img[class*="h-full"] {
   display: block;
   height: 100% !important;
 }
