@@ -10,60 +10,61 @@ const voorwaarden = await import('../../content/voorwaarden.json');
   <Header title={site.default.brand} />
   
   <!-- Custom Hero sectie -->
-  <section class="relative py-20 overflow-hidden">
+  <section class="relative py-24 sm:py-32 overflow-hidden bg-gradient-to-br from-primary-50 via-white to-accent-50 pt-32 sm:pt-40">
     <!-- Background decoration -->
-    <div class="absolute inset-0">
-      <div class="absolute top-10 left-10 w-32 h-32 bg-primary-200/30 rounded-full blur-2xl"></div>
-      <div class="absolute top-32 right-20 w-24 h-24 bg-blue-200/30 rounded-full blur-xl"></div>
-      <div class="absolute bottom-20 left-1/4 w-40 h-40 bg-orange-200/20 rounded-full blur-3xl"></div>
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-10 left-10 w-64 h-64 bg-primary-200/20 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute bottom-10 right-10 w-96 h-96 bg-accent-200/20 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute inset-0 bg-grid-pattern opacity-20"></div>
     </div>
     
     <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
-      <h1 class="text-5xl md:text-7xl font-bold text-slate-900 mb-8 leading-tight">
+      <p class="text-primary-600 font-bold mb-4 tracking-[0.2em] uppercase animate-fade-in">Juridische Informatie</p>
+      <h1 class="hero-heading text-slate-900 mb-8 animate-fade-in delay-100">
         {voorwaarden.default.title}
       </h1>
-      <p class="text-2xl text-slate-600 leading-relaxed max-w-4xl mx-auto mb-4">
+      <p class="text-xl sm:text-2xl text-slate-600 leading-relaxed max-w-4xl mx-auto mb-4 animate-fade-in delay-200">
         {voorwaarden.default.subtitle}
       </p>
-      <p class="text-lg text-slate-500 leading-relaxed max-w-3xl mx-auto">
-        Apenkooitoernooi wordt georganiseerd door {site.default.org}.
+      <p class="text-sm text-slate-500 font-sans uppercase tracking-widest font-bold animate-fade-in delay-300">
+        Georganiseerd door {site.default.org}
       </p>
     </div>
   </section>
   
   <!-- Intro sectie -->
-  <section class="py-20 bg-white">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="bg-blue-50 border-l-4 border-blue-400 p-8 rounded-r-2xl mb-8 shadow-lg">
-        <p class="text-xl text-slate-700 leading-relaxed">{voorwaarden.default.intro}</p>
+  <section class="py-12 sm:py-16 bg-white relative">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="bg-primary-50 border-l-8 border-primary-500 p-8 sm:p-10 rounded-r-[2.5rem] shadow-sm mb-6 animate-fade-in">
+        <p class="text-lg sm:text-xl text-slate-700 leading-relaxed font-sans font-medium italic">"{voorwaarden.default.intro}"</p>
       </div>
-      <p class="text-sm text-slate-500 text-right">{voorwaarden.default.lastUpdated}</p>
+      <p class="text-sm text-slate-400 text-right font-sans font-bold uppercase tracking-widest">{voorwaarden.default.lastUpdated}</p>
     </div>
   </section>
   
   <!-- Voorwaarden secties -->
-  <div>
+  <div class="bg-white pb-20">
     {voorwaarden.default.sections.map((section, sectionIndex) => (
-      <section class="py-20 -mt-4">
-        <div class="max-w-6xl mx-auto px-6">
-          <div class="mb-16">
-            <h2 class="text-4xl font-bold text-slate-900 mb-6 flex items-center justify-center">
-              <span class="bg-primary-600 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mr-4">
-                {sectionIndex + 1}
-              </span>
-              {section.title}
-            </h2>
-            <div class="w-24 h-1 bg-primary-600 mx-auto"></div>
+      <section class="section-spacing relative overflow-hidden pt-10 sm:pt-16">
+        {sectionIndex % 2 === 1 && <div class="absolute inset-0 bg-slate-50 bg-grid-pattern opacity-20 pointer-events-none"></div>}
+        <div class="max-w-6xl mx-auto px-6 relative">
+          <div class="flex items-center gap-4 mb-12 sm:mb-16 animate-fade-in">
+            <div class="w-12 h-12 bg-primary-600 text-white rounded-2xl flex items-center justify-center text-xl font-bold shadow-lg shadow-primary-100">
+              {sectionIndex + 1}
+            </div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl text-slate-900">{section.title}</h2>
           </div>
           
-          <div class="grid md:grid-cols-2 gap-8">
-            {section.items.map((item) => (
-              <div class="bg-white rounded-2xl p-8 shadow-xl border border-slate-200 hover:shadow-2xl transition-shadow duration-300">
-                <h3 class="text-xl font-semibold text-slate-900 mb-4 flex items-start">
-                  <span class="text-primary-600 mr-3 mt-1 text-2xl">📋</span>
+          <div class="grid md:grid-cols-2 gap-8 sm:gap-10">
+            {section.items.map((item, itemIdx) => (
+              <div class="glass-card rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 group animate-fade-in border-slate-100" style={`animation-delay: ${itemIdx * 100}ms`}>
+                <h3 class="text-xl sm:text-2xl text-slate-900 mb-4 flex items-start group-hover:text-primary-600 transition-colors font-condensed font-bold tracking-wide uppercase">
+                  <span class="text-primary-600 mr-4 group-hover:rotate-12 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+                  </span>
                   {item.titel}
                 </h3>
-                <p class="text-slate-600 leading-relaxed text-lg ml-11">{item.beschrijving}</p>
+                <p class="text-slate-600 leading-relaxed text-lg font-sans font-medium">{item.beschrijving}</p>
               </div>
             ))}
           </div>
@@ -73,18 +74,21 @@ const voorwaarden = await import('../../content/voorwaarden.json');
   </div>
   
   <!-- Contact sectie -->
-  <section class="py-20 -mt-4">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold text-slate-900 mb-6">Vragen over de voorwaarden?</h2>
-      <p class="text-xl text-slate-600 mb-8">
+  <section class="section-spacing bg-slate-50 relative overflow-hidden">
+    <div class="absolute inset-0 bg-dot-pattern opacity-10"></div>
+    <div class="max-w-4xl mx-auto px-6 text-center relative">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl text-slate-900 mb-6">Vragen over de voorwaarden?</h2>
+      <p class="text-lg sm:text-xl text-slate-600 mb-10 max-w-2xl mx-auto font-sans font-medium">
         Heb je vragen over deze algemene voorwaarden? Neem gerust contact met ons op.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/contact" class="inline-flex items-center px-8 py-4 bg-primary-600 text-white rounded-xl font-semibold text-lg hover:bg-primary-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 shadow-md">
-          📧 Contact opnemen
+        <a href="/contact" class="btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Contact opnemen
         </a>
-        <a href="/faq" class="inline-flex items-center px-8 py-4 bg-slate-600 text-white rounded-xl font-semibold text-lg hover:bg-slate-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 shadow-md">
-          ❓ FAQ bekijken
+        <a href="/faq" class="btn-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+          FAQ bekijken
         </a>
       </div>
     </div>

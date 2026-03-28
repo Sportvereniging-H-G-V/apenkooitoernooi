@@ -5,7 +5,7 @@ import { appendJsonl, type CloudflareEnv } from '../../lib/log';
 import { verifyCaptcha } from '../../lib/captcha';
 import { sendMail } from '../../lib/email';
 
-export async function POST({ request, redirect, locals }: APIContext) {
+export async function POST({ request, redirect }: APIContext) {
   // Prefer Cloudflare's trusted cf-connecting-ip header over the spoofable x-forwarded-for
   const ip = request.headers.get('cf-connecting-ip') ||
              request.headers.get('x-forwarded-for')?.split(',')[0] ||
@@ -31,13 +31,15 @@ export async function POST({ request, redirect, locals }: APIContext) {
     payload['cf-turnstile-response'] ||
     (form.get('cf-turnstile-response') as string | null);
   
-  // Cloudflare environment variabelen - correct voor Cloudflare Pages Functions
-  // Astro Cloudflare adapter maakt env beschikbaar via locals.runtime.env
-  interface LocalsWithRuntime {
-    runtime?: { env?: CloudflareEnv };
+  // Cloudflare environment variabelen via cloudflare:workers (Astro v6)
+  let cfEnv: CloudflareEnv | undefined;
+  try {
+    const { env: workersEnv } = await import('cloudflare:workers');
+    cfEnv = workersEnv as unknown as CloudflareEnv;
+  } catch {
+    // Niet in Cloudflare Workers omgeving
   }
-  const runtimeEnv = (locals as LocalsWithRuntime | undefined)?.runtime?.env;
-  const env = runtimeEnv;
+  const env = cfEnv;
   
   // Voor Cloudflare Pages Functions: env is direct beschikbaar via runtime.env
   // Fallback naar import.meta.env of process.env voor local development (veilig)
@@ -75,9 +77,9 @@ export async function POST({ request, redirect, locals }: APIContext) {
     let leeftijdsgroep: '4-5' | '6' | '7-8' = '6'; // default
     if (payload.aanmelding_type) {
       const aanmeldingType = payload.aanmelding_type.toLowerCase();
-      if (aanmeldingType.includes('groep 4, 5 en 6') || aanmeldingType.includes('groep 4,5 en 6')) {
+      if (aanmeldingType.includes('groep 4, 5 en 6') || aanmeldingType.includes('groep 4,5 en 6') || aanmeldingType.includes('groep 4, 5, 6') || aanmeldingType.includes('categorie 1')) {
         leeftijdsgroep = '4-5';
-      } else if (aanmeldingType.includes('groep 6, 7 en 8') || aanmeldingType.includes('groep 6,7 en 8')) {
+      } else if (aanmeldingType.includes('groep 6, 7 en 8') || aanmeldingType.includes('groep 6,7 en 8') || aanmeldingType.includes('groep 6, 7, 8') || aanmeldingType.includes('categorie 2')) {
         // Groep 6, 7 en 8 - gebruik '7-8' als default, of '6' als alleen groep 6
         leeftijdsgroep = '7-8';
       }

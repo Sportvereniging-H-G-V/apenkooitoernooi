@@ -9,168 +9,93 @@ const site = await import('../../content/site.json');
   <Header title={site.default.brand} />
   
   <!-- 404 Hero sectie -->
-  <section class="relative py-20 sm:py-24 md:py-32 overflow-hidden">
+  <section class="relative py-24 sm:py-32 md:py-40 overflow-hidden bg-gradient-to-br from-primary-50 via-white to-accent-50 pt-32 sm:pt-40">
     <!-- Background decoration -->
-    <div class="absolute inset-0">
-      <div class="absolute top-10 left-10 w-32 h-32 bg-primary-200/30 rounded-full blur-2xl"></div>
-      <div class="absolute top-32 right-20 w-24 h-24 bg-blue-200/30 rounded-full blur-xl"></div>
-      <div class="absolute bottom-20 left-1/4 w-40 h-40 bg-orange-200/20 rounded-full blur-3xl"></div>
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute top-10 left-10 w-64 h-64 bg-primary-200/20 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute bottom-10 right-10 w-96 h-96 bg-accent-200/20 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute inset-0 bg-grid-pattern opacity-20"></div>
     </div>
     
     <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
-      <!-- Apen emoji's -->
-      <div class="text-6xl sm:text-7xl md:text-8xl mb-8 animate-bounce">
-        <span class="inline-block">🐵</span>
-        <span class="inline-block animate-pulse delay-75">🦍</span>
-        <span class="inline-block animate-bounce delay-150">🐒</span>
-        <span class="inline-block animate-pulse delay-200">🦧</span>
+      <!-- Fun monkey icon -->
+      <div class="inline-flex items-center justify-center w-24 h-24 bg-primary-100 text-primary-600 rounded-[2rem] mb-8 shadow-xl shadow-primary-100 rotate-12 animate-bounce">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg>
       </div>
       
       <!-- 404 nummer -->
-      <h1 class="text-8xl sm:text-9xl md:text-[12rem] font-bold text-primary-600 mb-4 sm:mb-6 leading-none">
+      <h1 class="text-9xl sm:text-[12rem] md:text-[15rem] font-bold text-primary-600/10 mb-[-4rem] sm:mb-[-6rem] leading-none select-none font-condensed animate-pulse">
         404
       </h1>
       
       <!-- Titel -->
-      <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 sm:mb-8 leading-tight">
-        Pagina niet gevonden 🤸
+      <h2 class="text-4xl sm:text-5xl md:text-6xl text-slate-900 mb-8 animate-fade-in">
+        Pagina niet gevonden!
       </h2>
       
       <!-- Beschrijving -->
-      <p class="text-lg sm:text-xl md:text-2xl text-slate-600 leading-relaxed max-w-3xl mx-auto mb-8 sm:mb-12">
-        Oeps! Deze pagina is wegge-<span class="font-semibold text-primary-600">slingerd</span> of over de toestellen geklommen. 
-        We hebben deze link niet kunnen vinden tijdens het <span class="font-semibold text-primary-600">apenkooi</span> spelen! 🏃
+      <p class="text-xl sm:text-2xl text-slate-600 leading-relaxed max-w-3xl mx-auto mb-12 animate-fade-in delay-100 font-sans font-medium">
+        Oeps! Deze pagina is wegge-<span class="text-primary-600 font-bold underline decoration-primary-200 underline-offset-4">slingerd</span> of over de toestellen geklommen. 
+        We hebben deze link niet kunnen vinden tijdens het <span class="text-primary-600 font-bold">apenkooi</span> spelen!
       </p>
       
       <!-- Actie buttons -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a 
-          href="/" 
-          class="inline-flex items-center px-8 py-4 bg-primary-600 text-white rounded-xl font-semibold text-lg hover:bg-primary-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 shadow-md"
-        >
-          🏠 Terug naar home
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in delay-200">
+        <a href="/" class="btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Terug naar home
         </a>
-        <a 
-          href="/inschrijven" 
-          class="inline-flex items-center px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold text-lg hover:bg-blue-700 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 shadow-md"
-        >
-          🚀 Inschrijven
+        <a href="/#inschrijven" class="btn-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Nu inschrijven
         </a>
       </div>
     </div>
   </section>
   
   <!-- Help sectie -->
-  <section class="py-16 sm:py-20 md:py-24 -mt-4">
-    <div class="max-w-4xl mx-auto px-6">
-      <div class="text-center mb-12">
-        <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-          Wat zoek je? 🤸
-        </h3>
-        <div class="w-24 h-1 bg-primary-600 mx-auto"></div>
+  <section class="section-spacing bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-16 animate-fade-in">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl text-slate-900 mb-4">Wat zoek je precies?</h2>
+        <p class="text-lg text-slate-500 font-sans font-medium">Misschien helpt een van deze links je op weg</p>
       </div>
       
-      <div class="grid sm:grid-cols-2 gap-6">
-        <!-- Link 1 -->
-        <a 
-          href="/inschrijven" 
-          class="group bg-gradient-to-br from-primary-50 to-blue-50 rounded-2xl p-6 sm:p-8 border border-primary-200 hover:shadow-xl hover:border-primary-400 transition-all duration-300"
-        >
-          <div class="text-4xl mb-4">🚀</div>
-          <h4 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">
-            Inschrijven
-          </h4>
-          <p class="text-slate-600">
-            Schrijf je team in voor het apenkooitoernooi
-          </p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <a href="/#inschrijven" class="glass-card rounded-[2rem] p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group border-slate-50">
+          <div class="w-12 h-12 bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          </div>
+          <h4 class="text-xl font-bold text-slate-900 mb-2 font-condensed tracking-wide uppercase">Inschrijven</h4>
+          <p class="text-sm text-slate-500 font-sans font-medium">Meld je team aan</p>
         </a>
         
-        <!-- Link 2 -->
-        <a 
-          href="/spelregels" 
-          class="group bg-gradient-to-br from-blue-50 to-slate-50 rounded-2xl p-6 sm:p-8 border border-blue-200 hover:shadow-xl hover:border-blue-400 transition-all duration-300"
-        >
-          <div class="text-4xl mb-4">📋</div>
-          <h4 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
-            Spelregels
-          </h4>
-          <p class="text-slate-600">
-            Bekijk de spelregels en voorwaarden
-          </p>
+        <a href="/spelregels" class="glass-card rounded-[2rem] p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group border-slate-50">
+          <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <h4 class="text-xl font-bold text-slate-900 mb-2 font-condensed tracking-wide uppercase">Spelregels</h4>
+          <p class="text-sm text-slate-500 font-sans font-medium">Hoe we spelen</p>
         </a>
         
-        <!-- Link 3 -->
-        <a 
-          href="/contact" 
-          class="group bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-6 sm:p-8 border border-green-200 hover:shadow-xl hover:border-green-400 transition-all duration-300"
-        >
-          <div class="text-4xl mb-4">📧</div>
-          <h4 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-green-600 transition-colors">
-            Contact
-          </h4>
-          <p class="text-slate-600">
-            Stel je vraag of neem contact op
-          </p>
+        <a href="/contact" class="glass-card rounded-[2rem] p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group border-slate-50">
+          <div class="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <h4 class="text-xl font-bold text-slate-900 mb-2 font-condensed tracking-wide uppercase">Contact</h4>
+          <p class="text-sm text-slate-500 font-sans font-medium">Stel je vraag</p>
         </a>
         
-        <!-- Link 4 -->
-        <a 
-          href="/faq" 
-          class="group bg-gradient-to-br from-orange-50 to-primary-50 rounded-2xl p-6 sm:p-8 border border-orange-200 hover:shadow-xl hover:border-orange-400 transition-all duration-300"
-        >
-          <div class="text-4xl mb-4">❓</div>
-          <h4 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-orange-600 transition-colors">
-            FAQ
-          </h4>
-          <p class="text-slate-600">
-            Veelgestelde vragen over het toernooi
-          </p>
+        <a href="/faq" class="glass-card rounded-[2rem] p-8 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group border-slate-50">
+          <div class="w-12 h-12 bg-accent-100 text-accent-600 rounded-xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+          </div>
+          <h4 class="text-xl font-bold text-slate-900 mb-2 font-condensed tracking-wide uppercase">FAQ</h4>
+          <p class="text-sm text-slate-500 font-sans font-medium">Veelgestelde vragen</p>
         </a>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Grappige sectie -->
-  <section class="py-12 sm:py-16 -mt-4">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200">
-        <div class="text-5xl mb-4">🏃</div>
-        <p class="text-lg sm:text-xl text-slate-700 italic">
-          "Deze pagina hebben we niet gevonden tijdens het apenkooi spelen! 
-          Misschien is hij wel over de toestellen geklommen en weggerend? 🤸"
-        </p>
       </div>
     </div>
   </section>
   
   <Footer org={site.default.org} contact={site.default.contact} />
 </Base>
-
-<style>
-  @keyframes bounce {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-  
-  .animate-bounce {
-    animation: bounce 2s infinite;
-  }
-  
-  .delay-75 {
-    animation-delay: 0.75s;
-  }
-  
-  .delay-150 {
-    animation-delay: 1.5s;
-  }
-  
-  .delay-200 {
-    animation-delay: 2s;
-  }
-</style>
-
-

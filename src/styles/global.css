@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* Primary color palette */
+  /* Primary color palette - Energetic Red/Orange */
   --color-primary-50: #fef2f2;
   --color-primary-100: #fee2e2;
   --color-primary-200: #fecaca;
@@ -13,8 +13,14 @@
   --color-primary-800: #991b1b;
   --color-primary-900: #7f1d1d;
 
+  /* Accent Orange */
+  --color-accent-50: #fff7ed;
+  --color-accent-500: #f97316;
+  --color-accent-600: #ea580c;
+
   /* Custom fonts */
-  --font-sans: Inter, system-ui, sans-serif;
+  --font-sans: 'Barlow', Inter, system-ui, sans-serif;
+  --font-condensed: 'Barlow Condensed', sans-serif;
   --font-hotMustard: 'HotMustardBTNPoster', cursive;
 }
 
@@ -30,45 +36,41 @@
 html, body {
   overflow-x: hidden;
   max-width: 100vw;
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+/* Accessibility focus styles */
+:focus-visible {
+  outline: 3px solid var(--color-primary-500);
+  outline-offset: 4px;
 }
 
 /* Ensure images and media don't overflow */
-img, video, iframe {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Prevent gray bars under images - ensure images fill their containers properly */
-img[class*="object-cover"],
-img[class*="h-full"],
-img[class*="h-"] {
-  display: block;
-  height: 100% !important;
-}
-
-/* Ensure image containers don't show background when image doesn't fill */
-.bg-slate-100 img,
-.bg-gradient-to-br img {
-  display: block;
-}
-
-/* Header container - increase padding by 1/3 */
-header .header-container {
-  padding-top: 0.67rem !important;
-  padding-bottom: 0.67rem !important;
-}
-
-@media (min-width: 640px) {
-  header .header-container {
-    padding-top: 0.67rem !important;
-    padding-bottom: 0.67rem !important;
+@layer base {
+  img, video, iframe {
+    max-width: 100%;
+    height: auto;
   }
 }
 
-/* Header logo should respect Tailwind height classes - override global height: auto */
+/* Prevent gray bars under images */
+img[class*="object-cover"],
+img[class*="h-full"] {
+  display: block;
+}
+
+/* Header container padding */
+header .header-container {
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+  transition: all 0.3s ease;
+}
+
+/* Header logo should respect Tailwind height classes */
 header img.header-logo,
 header img[alt="Apenkooi Toernooi"] {
-  height: 2.64rem !important;
+  height: 2.75rem !important;
   width: auto !important;
   max-width: 100%;
 }
@@ -76,21 +78,14 @@ header img[alt="Apenkooi Toernooi"] {
 @media (min-width: 640px) {
   header img.header-logo,
   header img[alt="Apenkooi Toernooi"] {
-    height: 3.135rem !important;
-  }
-}
-
-@media (min-width: 768px) {
-  header img.header-logo,
-  header img[alt="Apenkooi Toernooi"] {
-    height: 3.465rem !important;
+    height: 3.25rem !important;
   }
 }
 
 @media (min-width: 1024px) {
   header img.header-logo,
   header img[alt="Apenkooi Toernooi"] {
-    height: 3.96rem !important;
+    height: 4rem !important;
   }
 }
 
@@ -104,28 +99,68 @@ header img[alt="Apenkooi Toernooi"] {
     hyphens: auto;
     text-wrap: balance;
   }
+
+  h1, h2, h3 {
+    font-family: var(--font-condensed);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
 }
 
 @layer components {
   .hero-heading {
-    font-size: clamp(2rem, 6vw, 4.5rem);
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+    line-height: 1;
+    font-family: var(--font-condensed);
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-4 bg-primary-600 text-white rounded-2xl font-bold text-lg shadow-lg hover:bg-primary-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-8 py-4 bg-slate-100 text-slate-900 rounded-2xl font-bold text-lg shadow-sm hover:bg-slate-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 cursor-pointer;
+  }
+
+  .section-spacing {
+    @apply py-16 sm:py-24 md:py-32;
   }
 }
 
 @layer utilities {
-  .font-hotMustard {
-    font-family: var(--font-hotMustard);
+  .bg-grid-pattern {
+    background-image: radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .bg-dot-pattern {
+    background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+    background-size: 16px 16px;
   }
   
   /* Primary color text utilities */
-  .text-primary-50 { color: var(--color-primary-50); }
-  .text-primary-100 { color: var(--color-primary-100); }
-  .text-primary-200 { color: var(--color-primary-200); }
-  .text-primary-300 { color: var(--color-primary-300); }
-  .text-primary-400 { color: var(--color-primary-400); }
   .text-primary-500 { color: var(--color-primary-500); }
   .text-primary-600 { color: var(--color-primary-600); }
   .text-primary-700 { color: var(--color-primary-700); }
-  .text-primary-800 { color: var(--color-primary-800); }
-  .text-primary-900 { color: var(--color-primary-900); }
 }
+
+/* Custom animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
