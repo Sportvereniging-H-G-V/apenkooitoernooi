@@ -4,7 +4,9 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: 'https://apenkooitoernooi.nl',
   output: 'server',
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    imageService: 'passthrough',
+  }),
   build: { 
     inlineStylesheets: 'auto',
     assets: 'assets'
