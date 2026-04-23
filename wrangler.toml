@@ -5,6 +5,7 @@ compatibility_date = "2024-04-03"
 # Voor publieke variabelen (PUBLIC_ prefix) - kunnen in wrangler.toml
 [vars]
 PUBLIC_TURNSTILE_SITE_KEY = "0x4AAAAAAB_NNGt1RDkymzcu"
+PUBLIC_SENTRY_DSN = "https://25222526e06a0a3ac6f97083b3065329@o4511269175099392.ingest.de.sentry.io/4511269506121808"
 # FREESCOUT_API_URL = "https://your-freescout-instance.com"
 # FREESCOUT_MAILBOX_ID = "1"
 
